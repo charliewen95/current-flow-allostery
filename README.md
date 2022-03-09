@@ -1,11 +1,11 @@
-gb_network
+Flow Network
 ==============================
 [//]: # (Badges)
-[![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/gb_network/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/gb_network/actions?query=workflow%3ACI)
-[![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/gb_network/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/gb_network/branch/master)
+[![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master)
 
 
-gb_network_betweenness
+Flow Network
 
 ### Copyright
 

@@ -1,12 +1,11 @@
 """
-gb_network
-gb_network_betweenness
+flowNetwork
 """
 import sys
 from setuptools import setup, find_packages
 import versioneer
 
-short_description = "gb_network_betweenness".split("\n")[0]
+short_description = "flwo network".split("\n")[0]
 
 # from https://github.com/pytest-dev/pytest-runner#conditional-requirement
 needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
@@ -21,7 +20,7 @@ except:
 
 setup(
     # Self-descriptive entries which should always be present
-    name='gb_network',
+    name='flowNetwork',
     author='Chen Yun Wen',
     author_email='chenyun.wen@westernu.edu',
     description=short_description,
