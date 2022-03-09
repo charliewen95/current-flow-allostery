@@ -1,0 +1,7 @@
+/data/charlie/app/anaconda3/envs/gb_network/bin/python
+Python 3.6.15
+2.6.0
+Traceback (most recent call last):
+  File "gb_network/cx26_GB_DataBase_Testing.py", line 27, in <module>
+    conn=db_m.create_connection(network_database_directory+'/'+network_database_name)
+NameError: name 'network_database_directory' is not defined

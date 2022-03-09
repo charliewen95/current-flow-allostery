@@ -51,14 +51,3 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import networkx as nx
-
-#self defined functions
-import functions.correlation_data_utilities as corr_utils
-import functions.database_mod as db_m
-
-# Handle versioneer
-from _version import get_versions
-versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
-del get_versions, versions
