@@ -1,12 +1,12 @@
 #!/bin/bash
 ##### CREATING ENVIRONMENT
-conda create -n gb_network python=3.6 <<-EOF
+conda create -n flowNetwork python=3.6 <<-EOF
 y
 y
 EOF
 
 eval "$(conda shell.bash hook)"
-conda activate gb_network
+conda activate flowNetwork
 
 ##### Installing dependencies in environment
 conda install -c conda-forge numpy <<-EOF
