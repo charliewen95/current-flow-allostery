@@ -1,4 +1,4 @@
 Getting Started
 ===============
 
-This page details how to get started with gb_network. 
+This page details how to get started with flowNetwork. 
