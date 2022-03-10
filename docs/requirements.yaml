@@ -7,6 +7,8 @@ dependencies:
   - argparse
   - numpy
   - pandas
+  - Amber-MD
+  - Amber-MD/pytraj
   - pytraj
   - scipy
   - sqlalchemy
