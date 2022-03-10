@@ -6,7 +6,6 @@ channels:
 dependencies:
     # Base depends
   - python
-  - pip
   - argparse
   - numpy
   - pandas
@@ -15,7 +14,8 @@ dependencies:
   - networkx
 
     # Pip-only installs
-  - pip:
-    - scikit-misc
-    - pytraj
+#  - pip
+#  - pip:
+#    - scikit-misc
+#    - pytraj
 
