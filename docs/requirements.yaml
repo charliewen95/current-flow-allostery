@@ -4,7 +4,13 @@ dependencies:
     # Base depends
   - python
   - pip
-
+  - argparse
+  - numpy
+  - pandas
+  - pytraj
+  - scipy
+  - sqlalchemy
+  - networkx
 
 
     # Pip-only installs
