@@ -8,7 +8,7 @@ build:
 python:
   version: 3.6
   install:
-    - method: conda -conda-forge
+    - method: pip
       path: .
 
 conda:
