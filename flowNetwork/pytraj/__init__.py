@@ -20,6 +20,10 @@ try:
 except ImportError:
     raise ImportError("require pandas")
 try:
+    import pytraj as pt
+except ImportError:
+    raise ImportError("require pytraj")
+try:
     import scipy
     import scipy.sparse
     import scipy as sp
@@ -49,13 +53,6 @@ from sqlalchemy.orm import sessionmaker
 import networkx as nx
 
 #self defined functions
-from .betweenness import *
-from .functions import correlation_data_utilities as corr_utils
-from .functions import database_mod as db_m
+from . import correlation_data_utilities as corr_utils
+from . import database_mod as db_m
 
-# Handle versioneer
-from ._version import get_versions
-versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
-del get_versions, versions

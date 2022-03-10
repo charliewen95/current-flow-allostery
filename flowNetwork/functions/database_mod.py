@@ -1,4 +1,3 @@
-import sys
 
 #create an empty database
 network_database_directory='cx26_GB_Network_Database'

@@ -1,5 +1,7 @@
 name: docs
 channels:
+  - conda-forge
+
 dependencies:
     # Base depends
   - python
@@ -7,11 +9,10 @@ dependencies:
   - argparse
   - numpy
   - pandas
-  - pytraj
   - scipy
   - sqlalchemy
   - networkx
-
+  - sqlite3
 
     # Pip-only installs
   #- pip:

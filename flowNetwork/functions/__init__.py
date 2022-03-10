@@ -1,6 +1,4 @@
-"""
-flowNetwork
-"""
+""""""
 from __future__ import absolute_import
 from __future__ import print_function
 
@@ -19,10 +17,6 @@ try:
     import pandas as pd
 except ImportError:
     raise ImportError("require pandas")
-try:
-    import pytraj as pt
-except ImportError:
-    raise ImportError("require pytraj")
 try:
     import scipy
     import scipy.sparse
