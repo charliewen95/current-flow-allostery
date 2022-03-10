@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>flowNetwork.betweenness &mdash; flowNetwork  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> flowNetwork
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">flowNetwork</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>flowNetwork.betweenness</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for flowNetwork.betweenness</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="betweenness"><a class="viewcode-back" href="../../autosummary/flowNetwork.betweenness.html#flowNetwork.betweenness">[docs]</a><span></span><span class="k">def</span> <span class="nf">betweenness</span><span class="p">():</span>
+    <span class="n">parser</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Loads the specified GB interaction network and calculates the corresponding flow betweenness network&quot;</span><span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-indir&#39;</span><span class="p">,</span><span class="s1">&#39;--inputDirectory&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;inDir&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to the directory containing the interaction network file. Defaults to currently active directory&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--interactionFileName&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Name of the GB interaction energy data file to load (required). This data file should contain a&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">single interaction network. If there are more networks / interactions present, you will need to&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">use the &quot;-selectionQueryStrings&quot; argument to specify a pandas.DataFrame.query search query string&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">that can select a single network from the data. If duplicate edges are present, the program&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">will crash or give unpredictable results&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-q&#39;</span><span class="p">,</span><span class="s1">&#39;--selectionQueryStrings&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;List of query strings to select entries from the interaction data that specify a single network&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">to be analyzed. If multiple strings are provided, the results are concatenated using pd.concat&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-c&#39;</span><span class="p">,</span><span class="s1">&#39;--NodeColumns&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Resid_1&#39;</span><span class="p">,</span><span class="s1">&#39;Resid_2&#39;</span><span class="p">],</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;nodeColumns&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Names of the columns containing the names of the interacting nodes for each interaction entry&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">exactly two arguments should be given. If not only the first two entries will get used.&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-e&#39;</span><span class="p">,</span><span class="s1">&#39;--energyColumn&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;TOTAL&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Name of the column containing the energy values of each interaction used to compute betweenness weights&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-s&#39;</span><span class="p">,</span><span class="s1">&#39;--sourceNodeNames&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;sourceNodeNames&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;string to be fed to the pandas DataFrame.query function to collect a list of source node names&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">if multiple entries are given, each will be fed and the results aggregated into a list of&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">of unique node names&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-t&#39;</span><span class="p">,</span><span class="s1">&#39;--targetNodeNames&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;targetNodeNames&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;string to be fed to the pandas DataFrame.query function to collect a list of target node names&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">if multiple entries are given, each will be fed and the results aggregated into a list of&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">of unique node names. Note: if there is any overlap. I.e. sourceNodes and targetNodes litst&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">contain some of the same node(s) then a warning will be thrown and the common nodes will be put&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">into the source node list.&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-outdir&#39;</span><span class="p">,</span><span class="s1">&#39;--outputFileDirectory&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;outDir&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path of the directory to write output files to&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="s1">&#39;--outputFileNameBase&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Base of the filenames e.g. edge betweenness would be in &quot;outputFileNameBase.EdgeBetweenness.csv&quot; (required)&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-ft&#39;</span><span class="p">,</span><span class="s1">&#39;--writeFullTable&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;If this flag is set, the output table will contain all data from each row of the input dataframe&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;otherwise it will only contain the node columns and betweenness column&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-wnvec&#39;</span><span class="p">,</span><span class="s1">&#39;--writeNodeVector&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span><span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;If flag is given, node betweenness will also be computed written to &quot;outputFileNameBase.NodeBetweenness.csv&quot;&#39;</span>
+    <span class="p">)</span>
+    
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-windmap&#39;</span><span class="p">,</span><span class="s1">&#39;--writeMatrixIndexToNodeNameMap&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span><span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;If this flag is given, a data frame containging the columns &quot;MatInd&quot; and &quot;NodeName&quot; is written to&#39;</span><span class="o">+</span>\
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&quot;outputFileNameBase.IndToNameMap.csv&quot;&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-dryrun&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span><span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Dont run anything, jsut print out input argument namespace and end program&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-v&#39;</span><span class="p">,</span><span class="s1">&#39;--verbose&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span><span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;controls printing of progress / information to stdout during run&#39;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-vl&#39;</span><span class="p">,</span><span class="s1">&#39;--verboseLevel&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;when verbose flag is given, controls the amount of detail printed&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">args</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">dryrun</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input arguments:&#39;</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">dryrun</span><span class="p">:</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span>
+        <span class="n">verboseLevel</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">verboseLevel</span><span class="p">)</span>
+        <span class="n">outFileBase</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">outputFileNameBase</span>
+        <span class="n">inputFile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">inDir</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">args</span><span class="o">.</span><span class="n">interactionFileName</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;loading data&#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verboseLevel</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">tempData</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">inputFile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">selectionQueryStrings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">selectionQueryStrings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-filtering loaded data&#39;</span><span class="p">)</span>
+            <span class="n">interactionData</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+                <span class="n">tempData</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">selectionQuery</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> \
+                <span class="k">for</span> <span class="n">selectionQuery</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">selectionQueryStrings</span>
+            <span class="p">])</span>
+            <span class="n">tempData</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">interactionData</span><span class="o">=</span><span class="n">tempData</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">tempData</span><span class="o">=</span><span class="p">[]</span>
+        
+        <span class="n">nodeColumn_1</span><span class="p">,</span><span class="n">nodeColumn_2</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">nodeColumns</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Building node name to index maps&#39;</span><span class="p">)</span>
+        <span class="n">nodeNames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+                <span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_1</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
+                <span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_2</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()])))</span>
+        <span class="n">nameToIndTable</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;NodeNames&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nodeNames</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">),</span>
+            <span class="s1">&#39;NodeInds&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodeNames</span><span class="p">))</span>
+        <span class="p">})</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">writeMatrixIndexToNodeNameMap</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;saving node name indexing map&#39;</span><span class="p">)</span>
+            <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">outDir</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">outFileBase</span><span class="o">+</span><span class="s1">&#39;.IndToNameMap.csv&#39;</span><span class="p">,</span>
+                <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">interactionData</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+            
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;building source node list&#39;</span><span class="p">)</span>
+        <span class="n">sourceNodeNames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">sourceNodeNames</span><span class="p">)</span>
+        <span class="n">sourceNodes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sourceNodeName</span><span class="p">]</span> \
+            <span class="k">for</span> <span class="n">sourceNodeName</span> <span class="ow">in</span> <span class="n">sourceNodeNames</span>
+        <span class="p">])</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;source nodes:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">:</span><span class="n">sourceNodes</span><span class="p">,</span><span class="s1">&#39;MatrixIndices&#39;</span><span class="p">:</span><span class="n">sourceNodes</span><span class="p">}))</span>
+        
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;building target node list&#39;</span><span class="p">)</span>
+        <span class="n">targetNodeNames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">targetNodeNames</span><span class="p">)</span>
+        <span class="n">targetNodes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">targetNodeName</span><span class="p">]</span> \
+            <span class="k">for</span> <span class="n">targetNodeName</span> <span class="ow">in</span> <span class="n">targetNodeNames</span>
+        <span class="p">])</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">verboseLevel</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;target nodes:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">:</span><span class="n">targetNodeNames</span><span class="p">,</span><span class="s1">&#39;MatrixIndices&#39;</span><span class="p">:</span><span class="n">targetNodes</span><span class="p">}))</span>
+                  
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Constructing network matrix&#39;</span><span class="p">)</span>
+        <span class="n">netMat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">interactionData</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">energyColumn</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">(),</span>
+             <span class="p">(</span><span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_1</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)],</span>
+              <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_2</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)])),</span>
+            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nameToIndTable</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">nameToIndTable</span><span class="p">))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+        
+        <span class="n">btwMat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">corr_utils</span><span class="o">.</span><span class="n">getBtwMat</span><span class="p">(</span>
+            <span class="n">mat</span><span class="o">=</span><span class="n">netMat</span><span class="p">,</span><span class="n">sources</span><span class="o">=</span><span class="n">sourceNodes</span><span class="p">,</span><span class="n">targets</span><span class="o">=</span><span class="n">targetNodes</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span><span class="n">verboseLevel</span><span class="o">=</span><span class="n">verboseLevel</span><span class="p">,</span>
+            <span class="n">useProgressBar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">useLegacyAlgorithm</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">))</span>
+        
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compiling betweenness table&#39;</span><span class="p">)</span>
+        <span class="n">btwTable</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="n">nodeColumn_1</span><span class="p">:</span><span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_1</span><span class="p">],</span>
+            <span class="n">nodeColumn_2</span><span class="p">:</span><span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_2</span><span class="p">],</span>
+            <span class="s1">&#39;Betweenness&#39;</span><span class="p">:</span><span class="n">btwMat</span><span class="p">[(</span>
+                <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                    <span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_1</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)],</span>
+                <span class="n">nameToIndTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">)[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                    <span class="n">interactionData</span><span class="p">[</span><span class="n">nodeColumn_2</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">str</span><span class="p">)]</span>
+            <span class="p">)]</span>
+        <span class="p">})</span>
+        
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">writeFullTable</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Joining Betweenness data to interaction data&#39;</span><span class="p">)</span>
+            <span class="n">btwTable</span><span class="o">=</span><span class="n">btwTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="n">nodeColumn_1</span><span class="p">,</span><span class="n">nodeColumn_2</span><span class="p">])</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">other</span><span class="o">=</span><span class="n">interactionData</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="n">nodeColumn_1</span><span class="p">,</span><span class="n">nodeColumn_2</span><span class="p">]),</span>
+                <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saving betweenness data&#39;</span><span class="p">)</span>
+        <span class="n">btwTable</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">outDir</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">args</span><span class="o">.</span><span class="n">outputFileNameBase</span><span class="o">+</span><span class="s1">&#39;.EdgeBetweenness.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">writeNodeVector</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing node betweenness&#39;</span><span class="p">)</span>
+            <span class="n">nodeBtw</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">btwMat</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span>
+            <span class="n">nodeTable</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                <span class="s1">&#39;NodeName&#39;</span><span class="p">:</span><span class="n">nameToIndTable</span><span class="p">[</span><span class="s1">&#39;NodeNames&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;Betweenness&#39;</span><span class="p">:</span><span class="n">nodeBtw</span><span class="p">[</span><span class="n">nameToIndTable</span><span class="p">[</span><span class="s1">&#39;NodeInds&#39;</span><span class="p">]]</span>
+            <span class="p">})</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saving node betweenness data&#39;</span><span class="p">)</span>
+            <span class="n">nodeTable</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">outDir</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">args</span><span class="o">.</span><span class="n">outputFileNameBase</span><span class="o">+</span><span class="s1">&#39;.NodeBetweenness.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Chen Yun Wen. Project structure based on the Computational Molecular Science Python Cookiecutter version 1.6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
