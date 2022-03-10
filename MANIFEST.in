@@ -3,5 +3,8 @@ include MANIFEST.in
 include CODE_OF_CONDUCT.md
 include versioneer.py
 
+include *.bash
+include *.sh
+
 graft flowNetwork
 global-exclude *.py[cod] __pycache__ *.so

@@ -1,6 +1,3 @@
-from __init__ import *
-
-
 def is_number(val):
     try:
         float(val)

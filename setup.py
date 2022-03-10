@@ -1,11 +1,12 @@
 """
 flowNetwork
+flowNetwork
 """
 import sys
 from setuptools import setup, find_packages
 import versioneer
 
-short_description = "flwo network".split("\n")[0]
+short_description = "flow network".split("\n")[0]
 
 # from https://github.com/pytest-dev/pytest-runner#conditional-requirement
 needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)

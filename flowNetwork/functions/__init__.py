@@ -1,5 +1,5 @@
 """
-gb_network
+flowNetwork
 """
 from __future__ import absolute_import
 from __future__ import print_function
@@ -51,3 +51,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import networkx as nx
+
+#self defined functions
+from . import correlation_data_utilities as corr_utils
+from . import database_mod as db_m
+

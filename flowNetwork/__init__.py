@@ -53,11 +53,12 @@ from sqlalchemy.orm import sessionmaker
 import networkx as nx
 
 #self defined functions
-import functions.correlation_data_utilities as corr_utils
-import functions.database_mod as db_m
+from .betweenness import *
+from .functions import correlation_data_utilities as corr_utils
+from .functions import database_mod as db_m
 
 # Handle versioneer
-from _version import get_versions
+from ._version import get_versions
 versions = get_versions()
 __version__ = versions['version']
 __git_revision__ = versions['full-revisionid']

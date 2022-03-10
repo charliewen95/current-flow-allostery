@@ -1,4 +1,4 @@
-from __init__ import *
+import sys
 
 #create an empty database
 network_database_directory='cx26_GB_Network_Database'
@@ -10,7 +10,7 @@ def create_new_db(db_file):
     try:
         conn=sqlite3.connect(db_file)
         print(sqlite3.version)
-    except Error as e:
+    except Exception as e:
         print(e)
     finally:
         if conn:
@@ -27,7 +27,7 @@ def create_connection(db_file):
     try:
         conn = sqlite3.connect(db_file)
         return conn
-    except Error as e:
+    except Exception as e:
         print(e)
         
     return conn
@@ -41,6 +41,6 @@ def create_table(conn, table_creation_sql_statement):
     try:
         c = conn.cursor()
         c.execute(table_creation_sql_statement)
-    except Error as e:
+    except Exception as e:
         print(e)
 
