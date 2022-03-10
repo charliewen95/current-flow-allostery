@@ -1,5 +1,6 @@
 name: docs
 channels:
+  - defaults
   - conda-forge
 
 dependencies:
@@ -14,5 +15,7 @@ dependencies:
   - networkx
 
     # Pip-only installs
-  #- pip:
+  - pip:
+    - scikit-misc
+    - pytraj
 
