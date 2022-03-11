@@ -6,17 +6,11 @@ channels:
 dependencies:
     # Base depends
   - python=3.6.15
-#  - argparse
-#  - numpy
-#  - pandas
-#  - scipy
-#  - sqlalchemy
-#  - networkx
 
     # Pip-only installs
   - pip
   - pip:
     - -r requirements.txt
     - scikit-misc
-#    - pytraj
+    - pytraj
 
