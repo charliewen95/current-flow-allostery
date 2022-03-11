@@ -37,7 +37,7 @@ python --version
 #EOF" ::: $inputDir ::: 'output_2' ::: `ls $inputDir | sed "s/.csv//g"`
 
 
-python flowNetwork/betweenness.py -indir GB_Network_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
+#python flowNetwork/betweenness.py -indir GB_Network_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
 
 #python <<-EOF
 #import flowNetwork
