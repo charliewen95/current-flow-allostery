@@ -4,3 +4,4 @@ pandas
 scipy
 sqlalchemy
 networkx
+sqlite3
