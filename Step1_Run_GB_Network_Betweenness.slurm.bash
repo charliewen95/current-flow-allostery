@@ -8,7 +8,7 @@
 
 export PATH=/cm/shared/apps\:$PATH
 inputDir=GB_Network_Data
-outputDir=GB_BTW_Network_Data
+outputDir=output_1
 
 which python
 python --version
@@ -34,7 +34,7 @@ None,\
 True,\
 2\
 )
-EOF" ::: $inputDir ::: 'output' ::: `ls $inputDir | sed "s/.csv//g"`
+EOF" ::: $inputDir ::: 'output_2' ::: `ls $inputDir | sed "s/.csv//g"`
 
 #python <<-EOF
 #import flowNetwork
@@ -56,9 +56,3 @@ EOF" ::: $inputDir ::: 'output' ::: `ls $inputDir | sed "s/.csv//g"`
 #2\
 #)
 #EOF
-
-#python <<-EOF
-#import flowNetwork
-#flowNetwork.betweenness('GB_Network_Data','output','EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv','EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv',None,['Resid_1','Resid_2'],None,'14 226 1356','47 226 1356',True,True,True,None,True,2)
-#EOF
-
