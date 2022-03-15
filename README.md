@@ -13,6 +13,10 @@ Install
 =======
 As the current module is still under development and clean up, the best way to get started is to clone the repository to your local computer. 
 
+There are 2 ways to proceed:
+   1. if you have miniconda './creating_environment' to create an environment specific for running bash command
+   2. call the functions in python
+
 
 Usage 
 =====
