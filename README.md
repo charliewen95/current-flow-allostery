@@ -48,7 +48,6 @@ Question/Suggestion?
 ====================
    1. Try to reach Charlie at chenyun.wen@westernu.edu
 
-
 ### Copyright
 
 Copyright (c) 2022, Chen Yun Wen
