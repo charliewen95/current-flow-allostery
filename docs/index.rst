@@ -3,28 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to flowNetwork's documentation!
+FlowNetwork
 =========================================================
 
-    print('This project is still under development')
-    >> comment
-
+Welcome to flowNetwork, this is still a project in development.
 
 Guide
 -----
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-<<<<<<< HEAD
    getting_started
-=======
    installation
    usage
    contributors_and_acknowledgement
    citation_and_references
    question
->>>>>>> b151802bc3c3342bafa75324c40cd095897074bd
    api
 
 
