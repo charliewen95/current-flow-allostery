@@ -16,7 +16,15 @@ Guide
    :maxdepth: 2
    :caption: Contents:
 
+<<<<<<< HEAD
    getting_started
+=======
+   installation
+   usage
+   contributors_and_acknowledgement
+   citation_and_references
+   question
+>>>>>>> b151802bc3c3342bafa75324c40cd095897074bd
    api
 
 
