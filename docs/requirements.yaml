@@ -10,7 +10,7 @@ dependencies:
   - pip
   - pip:
     - -r requirements.txt
-    - sqlite3
+    - pysqlite3
     - sphinx-autoapi
     - pytraj
 
