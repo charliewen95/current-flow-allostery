@@ -26,21 +26,6 @@ import sys
 import gc
 import copy
 import time
-import re
-import collections
-import subprocess
-import glob
-import sqlite3
-from itertools import islice
-from itertools import combinations
-from sqlite3 import Error
-
-#Others
-import sqlalchemy
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-import networkx as nx
 
 #self defined functions
 if __name__ == "__main__":
