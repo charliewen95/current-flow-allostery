@@ -11,6 +11,11 @@ Welcome to flowNetwork's documentation!
    :caption: Contents:
 
    getting_started
+   installation
+   usage
+   contributors_and_acknowledgement
+   citation_and_references
+   question
    api
 
 
