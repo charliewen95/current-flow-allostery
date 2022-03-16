@@ -1,0 +1,6 @@
+argparse
+numpy
+pandas
+scipy
+sqlalchemy
+networkx

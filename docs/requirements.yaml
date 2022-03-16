@@ -1,0 +1,16 @@
+name: docs
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+    # Base depends
+  - python=3.6.15
+    # Pip-only installs
+  - pip
+  - pip:
+    - -r requirements.txt
+    - sqlite3
+    - sphinx-autoapi
+    - pytraj
+
