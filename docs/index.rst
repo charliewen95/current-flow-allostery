@@ -10,7 +10,6 @@ Welcome to flowNetwork's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   getting_started
    installation
    usage
    contributors_and_acknowledgement
