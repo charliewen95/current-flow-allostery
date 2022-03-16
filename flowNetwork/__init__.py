@@ -51,6 +51,7 @@ import networkx as nx
 #self defined functions
 from .betweenness import *
 from .functions import correlation_data_utilities as corr_utils
+from .functions import betweenness_calc as bt_calc
 from .functions import database_mod as db_m
 
 # Handle versioneer

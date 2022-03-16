@@ -44,11 +44,9 @@ import networkx as nx
 
 #self defined functions
 if __name__ == "__main__":
-    from functions import correlation_data_utilities as corr_utils
-    from functions import database_mod as db_m
+    from functions import betweenness_calc as bt_calc
 else:
-    from .functions import correlation_data_utilities as corr_utils
-    from .functions import database_mod as db_m
+    from .functions import betweenness_calc as bt_calc
 
 if __name__ == "__main__":
     # Do something if this file is invoked on its own
@@ -212,7 +210,7 @@ if __name__ == "__main__":
             shape=(len(nameToIndTable),len(nameToIndTable))
         ).todense())
         
-        btwMat=np.array(corr_utils.getBtwMat(
+        btwMat=np.array(bt_calc.getBtwMat(
             mat=netMat,sources=sourceNodes,targets=targetNodes,
             verbose=verbose,verboseLevel=verboseLevel,
             useProgressBar=False,useLegacyAlgorithm=False
@@ -362,7 +360,7 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
             shape=(len(nameToIndTable),len(nameToIndTable))
         ).todense())
         
-        btwMat=np.array(corr_utils.getBtwMat(
+        btwMat=np.array(bt_calc.getBtwMat(
             mat=netMat,sources=sourceNodes,targets=targetNodes,
             verbose=verbose,verboseLevel=verboseLevel,
             useProgressBar=False,useLegacyAlgorithm=False

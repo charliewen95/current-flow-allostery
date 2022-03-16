@@ -48,5 +48,6 @@ import networkx as nx
 
 #self defined functions
 from . import correlation_data_utilities as corr_utils
+from . import betweenness_calc as bt_calc
 from . import database_mod as db_m
 
