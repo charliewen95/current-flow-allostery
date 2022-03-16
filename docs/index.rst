@@ -6,16 +6,17 @@
 Welcome to flowNetwork's documentation!
 =========================================================
 
+    print('This project is still under development')
+    >> comment
+
+
+Guide
+-----
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    getting_started
-   installation
-   usage
-   contributors_and_acknowledgement
-   citation_and_references
-   question
    api
 
 
