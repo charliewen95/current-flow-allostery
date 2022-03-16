@@ -4,16 +4,13 @@
    contain the root `toctree` directive.
 
 FlowNetwork
-=========================================================
+===========
 
 Welcome to flowNetwork, this is still a project in development.
 
-Guide
------
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-   getting_started
+   :caption: Go_to:
    installation
    usage
    contributors_and_acknowledgement
