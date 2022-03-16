@@ -8,9 +8,15 @@ FlowNetwork
 
 Welcome to flowNetwork, this is still a project in development.
 
+.. content::
+   :maxdepth: 2
+   :caption: Welcome:
+   installation
+   usage
+
 .. toctree::
    :maxdepth: 2
-   :caption: Go_to:
+   :caption: Contents:
    installation
    usage
    contributors_and_acknowledgement
