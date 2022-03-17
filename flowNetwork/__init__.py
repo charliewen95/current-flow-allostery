@@ -36,10 +36,10 @@ import re
 import collections
 import subprocess
 import glob
-import sqlite3
 from itertools import islice
 from itertools import combinations
-from sqlite3 import Error
+#import sqlite3
+#from sqlite3 import Error
 
 #Others
 import sqlalchemy
