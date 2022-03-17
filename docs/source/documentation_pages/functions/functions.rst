@@ -2,7 +2,7 @@ Functions
 =========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    ./betweenness_calc
    ./correlation_data_utilities
