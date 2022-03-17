@@ -1,5 +1,3 @@
-
-#create an empty database
 network_database_directory='cx26_GB_Network_Database'
 network_database_name='cx26_GB_Network.db'
 

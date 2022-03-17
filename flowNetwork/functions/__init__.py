@@ -34,10 +34,10 @@ import re
 import collections
 import subprocess
 import glob
-import sqlite3
 from itertools import islice
 from itertools import combinations
-from sqlite3 import Error
+#import sqlite3
+#from sqlite3 import Error
 
 #Others
 import sqlalchemy
@@ -49,5 +49,5 @@ import networkx as nx
 #self defined functions
 from . import correlation_data_utilities as corr_utils
 from . import betweenness_calc as bt_calc
-from . import database_mod as db_m
+#from . import database_mod as db_m
 

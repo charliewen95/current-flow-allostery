@@ -1,3 +1,4 @@
+''''''
 try:
     import argparse
 except ImportError:
@@ -239,7 +240,7 @@ if __name__ == "__main__":
 
 
 def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQueryStrings,nodeColumns,energyColumn,sourceNodeNames,targetNodeNames,writeFullTable,writeNodeVector,writeMatrixIndexToNodeNameMap,dryrun,verbose,verboseLevel):
-    '''
+    """
     This function is the main function to call for the betweenness calculation.
     NOTE: This function take a total of 15 variables, make sure to give them a count
     
@@ -267,7 +268,7 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
     -----------
     If there are multiple files to be run, this can be ran parallel following the example in Step1_Run_GB_Network_Betweenness.slurm.bash.
     
-    '''
+    """
     #####Default Settings of the Variables
     if inDir == None:
         inDir = '.'

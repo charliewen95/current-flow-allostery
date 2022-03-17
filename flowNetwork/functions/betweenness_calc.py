@@ -1,11 +1,13 @@
 """
-for betweenness calculation
+Functions
+---------
+.. autofunction:: getBtwMat
 """
 
 def getBtwMat(mat,sources,targets,
               verbose=False,verboseLevel=0,
               useProgressBar=False,useLegacyAlgorithm=False):
-    '''
+    """
     Given a (possibly weighted) network in matrix format (mat)
     and a set of source and target nodes (sources and targets)
     return the corresponding network with flow betweenness
@@ -17,7 +19,7 @@ def getBtwMat(mat,sources,targets,
     At worst case, this could yield O(n^4) for an n-node matrix!
     Also, the sources and targets must be disjoint sets or the results
     will be incorrect.
-    '''
+    """
     if verbose:
         print("computing matrix Laplacian")
     Lmat=matLap(copy.deepcopy(mat))
