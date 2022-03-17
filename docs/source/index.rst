@@ -23,7 +23,8 @@ Welcome to flowNetwork, this is still a project in development.
    ./documentation_pages/contributors_and_acknowledgement
    ./documentation_pages/citation_and_references
    ./documentation_pages/question
-   ./documentation_pages/api
+   ./documentation_pages/betweenness
+   ./documentation_pages/functions_module
 
 
 Indices and tables
