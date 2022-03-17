@@ -1,4 +1,4 @@
-flowNetwork functions
+flowNetwork.functions
 =====================
 
 .. toctree::

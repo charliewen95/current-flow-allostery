@@ -21,7 +21,6 @@ https://pubs.acs.org/doi/10.1021/acs.jctc.8b01197
    :numbered:           
    :hidden:
 
-   ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways
    ./documentation_pages/getting_started
    ./documentation_pages/installation
    ./documentation_pages/usage
@@ -30,7 +29,6 @@ https://pubs.acs.org/doi/10.1021/acs.jctc.8b01197
    ./documentation_pages/question
    ./documentation_pages/betweenness
    ./documentation_pages/functions_module
-   ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways
 
 Indices and tables
 ==================
