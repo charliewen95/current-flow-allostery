@@ -1,3 +1,3 @@
-automodule:: flowNetwork.functions.database_mod
-   :members:
+.. autosummary::
+   flowNetwork.functions.database_mod
 

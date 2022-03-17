@@ -1,3 +1,3 @@
-automodule:: flowNetwork.functions.betweenness_calc
-   :members:
+.. autosummary::
+   flowNetwork.functions.betweenness_calc
 
