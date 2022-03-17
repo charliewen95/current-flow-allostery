@@ -7,7 +7,7 @@ FlowNetwork
 ===========
 
 Welcome to flowNetwork, this is still a project in development.
-   ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways
+.. image:: ../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
 
 .. Contents
 .. ========
