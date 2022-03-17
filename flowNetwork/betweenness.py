@@ -239,6 +239,35 @@ if __name__ == "__main__":
 
 
 def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQueryStrings,nodeColumns,energyColumn,sourceNodeNames,targetNodeNames,writeFullTable,writeNodeVector,writeMatrixIndexToNodeNameMap,dryrun,verbose,verboseLevel):
+    '''
+    This function is the main function to call for the betweenness calculation.
+    NOTE: This function take a total of 15 variables, make sure to give them a count
+    
+    Example
+    -------    
+    flowNetwork.betweenness(\
+    'GB_Network_Data',\
+    'output_2',\
+    'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv',\
+    'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv',\
+    None,\
+    ['Resid_1','Resid_2'],\
+    None,\
+    ['14','240','466','692','918','1144'],\
+    ['47','273','499','725','951','1177'],\
+    True,\
+    True,\
+    True,\
+    None,\
+    True,\
+    2\
+    )
+    
+    Other notes
+    -----------
+    If there are multiple files to be run, this can be ran parallel following the example in Step1_Run_GB_Network_Betweenness.slurm.bash.
+    
+    '''
     #####Default Settings of the Variables
     if inDir == None:
         inDir = '.'
