@@ -1,7 +1,4 @@
 """
-Functions
----------
-.. autofunction:: getBtwMat
 """
 
 def getBtwMat(mat,sources,targets,

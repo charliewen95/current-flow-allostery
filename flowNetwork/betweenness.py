@@ -1,4 +1,6 @@
-''''''
+"""
+This is the function that does the betweenness calculation
+"""
 try:
     import argparse
 except ImportError:
