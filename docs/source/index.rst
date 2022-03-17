@@ -23,7 +23,7 @@ Welcome to flowNetwork, this is still a project in development.
    ./documentation_pages/question
    ./documentation_pages/betweenness
    ./documentation_pages/functions_module
-
+   ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways
 
 Indices and tables
 ==================
