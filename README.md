@@ -4,7 +4,7 @@ Flow Network
 [![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/actions?query=workflow%3ACI)
 [![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master)
 
-![test](./pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png)
+![Robust Determination of Protein Allosteric Signaling Pathways](./pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png)
 
 Flow Network
 
