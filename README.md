@@ -1,16 +1,14 @@
 Flow Network
 ============
+Documentation: https://flownetwork.readthedocs.io/en/latest/index.html
+
 [//]: # (Badges)
 [![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/actions?query=workflow%3ACI)
 [![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/flowNetwork/branch/master)
 
 ![Robust Determination of Protein Allosteric Signaling Pathways](./pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png)
 
-Flow Network
-
-This page details how to get started with flowNetwork.
-
-Documentation: https://flownetwork.readthedocs.io/en/latest/index.html
+Allosteric network from molecular dynamics (MD) simulations is powerful for understanding how protein function changes upon an allosteric perturbation, such as ligand binding and mutation. The main challenge in mapping out the information propagating between amino acids is due to the large fluctuations in protein dynamics that cause instability of the network topology. To solve this problem, we introduce the current-flow betweenness scheme, which originated from electrical network theory. The current-flow betweenness provides a significant improvement in the convergence of the allosteric networks.
 
 Install
 =======

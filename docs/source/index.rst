@@ -17,6 +17,7 @@ Welcome to flowNetwork, this is still a project in development.
    :numbered:           
    :hidden:
 
+   ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways
    ./documentation_pages/getting_started
    ./documentation_pages/installation
    ./documentation_pages/usage
