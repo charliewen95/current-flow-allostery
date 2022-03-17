@@ -19,7 +19,7 @@ Allosteric network from molecular dynamics (MD) simulations is powerful for unde
 https://pubs.acs.org/doi/10.1021/acs.jctc.8b01197
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:           
    :hidden:
 
@@ -29,8 +29,7 @@ https://pubs.acs.org/doi/10.1021/acs.jctc.8b01197
    ./documentation_pages/contributors_and_acknowledgement
    ./documentation_pages/citation_and_references
    ./documentation_pages/question
-   ./documentation_pages/betweenness
-   ./documentation_pages/functions_module
+   ./documentation_pages/all_functions
 
 Indices and tables
 ==================

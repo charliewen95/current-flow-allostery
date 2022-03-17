@@ -1,4 +1,7 @@
 Betweenness
 ===========
 
-.. automodule:: flowNetwork.betweenness
+.. autosummary:: 
+   flowNetwork.betweenness
+
+
