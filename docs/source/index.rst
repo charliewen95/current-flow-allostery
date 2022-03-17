@@ -7,10 +7,7 @@ FlowNetwork
 ===========
 
 Welcome to flowNetwork, this is still a project in development.
-.. |Substitution Name| image:: ../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
 
-.. Contents
-.. ========
 
 .. toctree::
    :maxdepth: 2
