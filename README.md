@@ -9,6 +9,8 @@ Flow Network
 
 This page details how to get started with flowNetwork.
 
+Documentation: https://flownetwork.readthedocs.io/en/latest/index.html
+
 Install
 =======
 As the current module is still under development and clean up, the best way to get started is to clone the repository to your local computer. 
