@@ -8,11 +8,9 @@ FlowNetwork
 
 Welcome to flowNetwork, this is still a project in development.
 
-.. |test1| image:: ./Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
-   :width: 400
-   :alt: test2
-The screen opens:
-|test1|
+.. |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways| image:: ../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
+
+|Robust_Determination_of_Protein_Allosteric_Signaling_Pathways|
 
 .. toctree::
    :maxdepth: 2
