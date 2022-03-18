@@ -1,14 +1,14 @@
-.. flowNetwork documentation master file, created by
+.. current-flow-allostery documentation master file, created by
    sphinx-quickstart on Thu Mar 15 13:55:56 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 .. |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways| image:: ../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
 
-FlowNetwork
-===========
+Current Flow Allostery
+======================
 
-Welcome to flowNetwork, this is still a project in development.
+Welcome to Current Flow Allostery, this is still a project in development.
 
 |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways|
 

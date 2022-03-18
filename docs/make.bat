@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
-set SPHINXPROJ=flowNetwork
+set SPHINXPROJ=current-flow-allostery
 
 if "%1" == "" goto help
 

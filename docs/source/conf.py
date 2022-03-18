@@ -17,12 +17,12 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
-import flowNetwork
+import current-flow-allostery
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'flowNetwork'
+project = 'current-flow-allostery'
 copyright = ("2022, Chen Yun Wen. Project structure based on the "
              "Computational Molecular Science Python Cookiecutter version 1.6")
 author = 'Chen Yun Wen'
@@ -117,7 +117,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'flowNetworkdoc'
+htmlhelp_basename = 'current-flow-allosterydoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -144,8 +144,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'flowNetwork.tex', 'flowNetwork Documentation',
-     'flowNetwork', 'manual'),
+    (master_doc, 'current-flow-allostery.tex', 'current-flow-allostery Documentation',
+     'current-flow-allostery', 'manual'),
 ]
 
 
@@ -154,7 +154,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'flowNetwork', 'flowNetwork Documentation',
+    (master_doc, 'current-flow-allostery', 'current-flow-allostery Documentation',
      [author], 1)
 ]
 
@@ -165,8 +165,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'flowNetwork', 'flowNetwork Documentation',
-     author, 'flowNetwork',
+    (master_doc, 'current-flow-allostery', 'current-flow-allostery Documentation',
+     author, 'current-flow-allostery',
      'Miscellaneous'),
 ]
 

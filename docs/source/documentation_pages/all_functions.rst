@@ -1,5 +1,5 @@
-flowNetwork.functions
-=====================
+All Functions
+=============
 
 .. toctree::
    :maxdepth: 1
