@@ -121,7 +121,6 @@ def netMatDict_to_edgeDataTable(netMatDict,
     else:
         indCols=indexCols
         for matKey in list(netMatDict.keys()):
-            pbar.set_description_str('%s'%matKey)
             keyParts=matKey.split('.')
             tempMat=netMatDict[matKey]
             if sparse:

@@ -1,5 +1,5 @@
-network_database_directory='cx26_GB_Network_Database'
-network_database_name='cx26_GB_Network.db'
+import sqlite3
+from sqlite3 import Error
 
 def create_new_db(db_file):
     """ create a database connection to an SQLite database """
@@ -13,8 +13,6 @@ def create_new_db(db_file):
         if conn:
             conn.close()
     
-create_new_db(network_database_directory+'/'+network_database_name)
-
 #Create a Network table in the database and add frame data to it
 def create_connection(db_file):
     """ create a connection to the specified SQLite database file (db_file)
