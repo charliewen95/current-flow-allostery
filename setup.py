@@ -1,5 +1,5 @@
 """
-current-flow-allostery
+current_flow_allostery
 """
 import sys
 from setuptools import setup, find_packages
@@ -20,7 +20,7 @@ except:
 
 setup(
     # Self-descriptive entries which should always be present
-    name='current-flow-allostery',
+    name='current_flow_allostery',
     author='Chen Yun Wen',
     author_email='chenyun.wen@westernu.edu',
     description=short_description,

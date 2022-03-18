@@ -9,5 +9,5 @@ include pics/*.jpg
 incldue pics/*.png
 include pics/*.gif
 
-graft current-flow-allostery
+graft current_flow_allostery
 global-exclude *.py[cod] __pycache__ *.so

@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = current-flow-allostery
+SPHINXPROJ    = current_flow_allostery
 SOURCEDIR     = source
 BUILDDIR      = _build
 

@@ -3,7 +3,7 @@ Installation
 As the current module is still under development and clean up, the best way to get started is to clone the repository to your local computer. 
 
 This clones the repository:
-        git clone git@github.com:charliewen95/current-flow-allostery.git
+        git clone git@github.com:charliewen95/current_flow_allostery.git
 
 Then you have 2 choices:
    1. Create environemnt using 

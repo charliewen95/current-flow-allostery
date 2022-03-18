@@ -1,7 +1,7 @@
 Betweenness
 ===========
 
-.. automodule:: current-flow-allostery.betweenness
+.. automodule:: current_flow_allostery.betweenness
       :members:
 
 

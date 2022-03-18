@@ -3,8 +3,8 @@ Current Flow Allostery
 Documentation: https://flownetwork.readthedocs.io/en/latest/index.html
 
 [//]: # (Badges)
-[![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current-flow-allostery/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current-flow-allostery/actions?query=workflow%3ACI)
-[![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/current-flow-allostery/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/current-flow-allostery/branch/master)
+[![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/branch/master)
 
 ![Robust Determination of Protein Allosteric Signaling Pathways](./pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png)
 
@@ -17,7 +17,7 @@ Install
 As the current module is still under development and clean up, the best way to get started is to clone the repository to your local computer.
 
 This clones the repository:
-   'git clone git@github.com:charliewen95/current-flow-allostery.git'
+   'git clone git@github.com:charliewen95/current_flow_allostery.git'
 
 Then you have 2 choices:
    1. Create environemnt using "./creating_environment.sh"
@@ -32,8 +32,8 @@ This package is written in 2 ways:
    2. As a python function
 
 e.g.
-import current-flow-allostery
-current-flow-allostery.betweenness()
+import current_flow_allostery
+current_flow_allostery.betweenness()
 
 For further and more specific examples of how to use, check out the attached bash submission script. Within you will be able to identify 4 different types of submission:
    1. Parallel bash submission
