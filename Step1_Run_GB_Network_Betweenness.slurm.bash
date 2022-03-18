@@ -13,11 +13,11 @@ outputDir=output_1
 which python
 python --version
 
-#parallel -j 12 "echo working on {3};python flowNetwork/betweenness.py -indir {1} -outdir {2} -i {3}.csv -o {3}.Betweenness -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > {2}/{3}.log" ::: $inputDir ::: $outputDir ::: `ls $inputDir | sed "s/.csv//g"`
+#parallel -j 12 "echo working on {3};python current-flow-allostery/betweenness.py -indir {1} -outdir {2} -i {3}.csv -o {3}.Betweenness -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > {2}/{3}.log" ::: $inputDir ::: $outputDir ::: `ls $inputDir | sed "s/.csv//g"`
 
 parallel -j 12 "python <<-EOF
-import flowNetwork
-flowNetwork.betweenness(\
+import current-flow-allostery
+current-flow-allostery.betweenness(\
 '{1}',\
 '{2}',\
 '{3}.csv',\
@@ -37,11 +37,11 @@ True,\
 EOF" ::: $inputDir ::: 'output_1' ::: `ls $inputDir | sed "s/.csv//g"`
 
 
-#python flowNetwork/betweenness.py -indir GB_Network_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
+#python current-flow-allostery/betweenness.py -indir GB_Network_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
 
 #python <<-EOF
-#import flowNetwork
-#flowNetwork.betweenness(\
+#import current-flow-allostery
+#current-flow-allostery.betweenness(\
 #'GB_Network_Data',\
 #'output_2',\
 #'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv',\

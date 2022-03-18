@@ -9,5 +9,5 @@ include pics/*.jpg
 incldue pics/*.png
 include pics/*.gif
 
-graft flowNetwork
+graft current-flow-allostery
 global-exclude *.py[cod] __pycache__ *.so

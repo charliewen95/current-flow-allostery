@@ -1,5 +1,5 @@
 """
-Unit and regression test for the flowNetwork package.
+Unit and regression test for the current-flow-allostery package.
 """
 
 # Import package, test suite, and other packages as needed
@@ -7,9 +7,9 @@ import sys
 
 import pytest
 
-import flowNetwork
+import current-flow-allostery
 
 
-def test_flowNetwork_imported():
+def test_current-flow-allostery_imported():
     """Sample test, will always pass so long as import statement worked."""
-    assert "flowNetwork" in sys.modules
+    assert "current-flow-allostery" in sys.modules

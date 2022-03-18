@@ -1,6 +1,5 @@
 """
-flowNetwork
-flowNetwork
+current-flow-allostery
 """
 import sys
 from setuptools import setup, find_packages
@@ -21,7 +20,7 @@ except:
 
 setup(
     # Self-descriptive entries which should always be present
-    name='flowNetwork',
+    name='current-flow-allostery',
     author='Chen Yun Wen',
     author_email='chenyun.wen@westernu.edu',
     description=short_description,
