@@ -248,7 +248,7 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
     
     Example
     -------    
-    flowNetwork.betweenness(\
+    current-flow-allostery.betweenness(\
     'GB_Network_Data',\
     'output_2',\
     'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv',\
