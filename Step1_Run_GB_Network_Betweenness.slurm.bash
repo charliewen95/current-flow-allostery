@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J cx26btw
+#SBATCH -J curr-flow-allo
 #SBATCH --get-user-env
 #SBATCH --partition=defq
 #SBATCH --nodes=1
