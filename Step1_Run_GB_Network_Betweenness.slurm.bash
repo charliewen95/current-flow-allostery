@@ -7,7 +7,7 @@
 #SBATCH --time=300:00:00
 
 export PATH=/cm/shared/apps\:$PATH
-inputDir=GB_Network_Data
+inputDir=Test_Data
 outputDir=output_1
 
 which python
@@ -37,12 +37,12 @@ True,\
 EOF" ::: $inputDir ::: 'output_1' ::: `ls $inputDir | sed "s/.csv//g"`
 
 
-#python current_flow_allostery/betweenness.py -indir GB_Network_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
+#python current_flow_allostery/betweenness.py -indir Test_Data -outdir output_1 -i EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv -o EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv -windmap -s `seq -s ' ' 14 226 1356` -t `seq -s ' ' 47 226 1356` -c 'Resid_1' 'Resid_2' -v -vl 2 --writeNodeVector -ft > output_1/EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.log
 
 #python <<-EOF
 #import current_flow_allostery
 #current_flow_allostery.betweenness(\
-#'GB_Network_Data',\
+#'Test_Data',\
 #'output_2',\
 #'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv',\
 #'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv',\
