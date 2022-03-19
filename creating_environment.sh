@@ -1,12 +1,12 @@
 #!/bin/bash
 ##### CREATING ENVIRONMENT
-conda create -n current-flow-allostery python=3.6 <<-EOF
+conda create -n current_flow_allostery python=3.6 <<-EOF
 y
 y
 EOF
 
 eval "$(conda shell.bash hook)"
-conda activate current-flow-allostery
+conda activate current_flow_allostery
 
 ##### Installing dependencies in environment
 conda install -c conda-forge numpy <<-EOF

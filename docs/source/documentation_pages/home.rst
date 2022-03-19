@@ -1,8 +1,8 @@
 
-.. |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways| image:: ../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
+.. |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways| image:: ../../../pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
 
-Current Flow Allostery
-======================
+Home
+====
 
 Welcome to Current Flow Allostery, this is still a project in development.
 
