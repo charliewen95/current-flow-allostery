@@ -1,6 +1,6 @@
 Current Flow Allostery
 ============
-Documentation: https://current-flow-allostery.readthedocs.io/en/latest/index.html
+Documentation: https://current_flow_allostery.readthedocs.io/en/latest/index.html
 
 [//]: # (Badges)
 [![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/current_flow_allostery/actions?query=workflow%3ACI)
