@@ -4,29 +4,10 @@ Current-Flow-Allostery
 [![GitHub Actions Build Status](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/test/workflows/CI/badge.svg)](https://github.com/REPLACE_WITH_OWNER_ACCOUNT/test/actions?query=workflow%3ACI)
 [![codecov](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/test/branch/master/graph/badge.svg)](https://codecov.io/gh/REPLACE_WITH_OWNER_ACCOUNT/test/branch/master)
 
-
-This repository is currently under development. To do a development install, download this repository and type
-
-`pip install -e .`
-
-in the repository directory.
-
-Features should be developed on branches. To create and switch to a branch, use the command
-
-`git checkout -b new_branch_name`
-
-To switch to an existing branch, use
-
-`git checkout new_branch_name`
-
-.. |Robust_Determination_of_Protein_Allosteric_Signaling_Pathways| image:: /pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png
-
-Home
-====
-
 Welcome to Current Flow Allostery, this is still a project in development.
 
-|Robust_Determination_of_Protein_Allosteric_Signaling_Pathways|
+#![plot](./directory_1/directory_2/.../directory_n/plot.png)
+![Robust_Determination_of_Protein_Allosteric_Signaling_Pathways](./pics/Robust_Determination_of_Protein_Allosteric_Signaling_Pathways.png)
 
 Robust Determination of Protein Allosteric Signaling Pathways
 =============================================================
