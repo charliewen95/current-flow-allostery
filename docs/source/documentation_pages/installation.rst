@@ -8,6 +8,7 @@ This clones the repository:
 Then you have 2 choices:
    1. Create environemnt using 
         ./creating_environment.sh
+        (This step may take ~10 mins.)
    2. Install the python package using 
         pip install -e .
       Note: if the code aboe doesn't work, try 
