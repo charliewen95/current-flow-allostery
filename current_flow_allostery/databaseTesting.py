@@ -11,6 +11,10 @@ import gc
 import pytraj as pt
 
 def databaseTesting(output_1,output_2,network_database_name):
+    
+    #output_1 = networkDataDir
+    #output_2 = network_database_directory
+    
     db_m.create_new_db(output_2+'/'+network_database_name)
     
     datafilenameKeywords=[
@@ -28,19 +32,46 @@ def databaseTesting(output_1,output_2,network_database_name):
     tempFrameColumnNames=tempFrame.columns
     tempFrameColumnTypes=tempFrame.dtypes.map(str)
     tempFrame.head()
-    
+
     #only need to use this if you want to delete a whole table
     
     #if not (conn is None):
     #    conn.close()
-    conn=db_m.create_connection(output_2+'/'+network_database_name)
     try:
-    	cur=conn.cursor()
-    	cur.execute('DROP TABLE Network_Node_Betweenness')
-    	conn.commit()
-    	conn.close()
+        conn=db_m.create_connection(output_2+'/'+network_database_name)
+        cur=conn.cursor()
+        cur.execute('DROP TABLE Network_Node_Betweenness')
+        conn.commit()
+        conn.close()
+        print('ERROR: Network_Node_Betweenness already exist')
     except:
-    	print('throw')
+        print('Network_Node_Betweenness does not exist')
+    else:
+        return
+    try:
+        conn=db_m.create_connection(output_2+'/'+network_database_name)
+        cur=conn.cursor()
+        cur.execute('DROP TABLE Alpha_Carbon_Structure_Data')
+        conn.commit()
+        conn.close()
+        print('ERROR: Alpha_Carbon_Structure_Data already exist')
+        sys.exit(1)
+    except:
+        print('Alpha_Carbon_Structure_Data does not exist')
+    else:
+        return
+    try:
+        conn=db_m.create_connection(output_2+'/'+network_database_name)
+        cur=conn.cursor()
+        cur.execute('DROP TABLE Networks')
+        conn.commit()
+        conn.close()
+        print('ERROR: Networks already exist')
+    except:
+        print('Networks does not exist')
+    else:
+        return
+    print('no table to delete') 
     #create new network table from the loaded frame
     conn=db_m.create_connection(output_2+'/'+network_database_name)
     
@@ -48,12 +79,9 @@ def databaseTesting(output_1,output_2,network_database_name):
         'system','subtype','rep','Frame'
     ]).to_sql("Networks",conn,if_exists='replace')
     
-    '''conn.execute(
-        """
-        create table Networks as
-        select * from tempFrame
-        """
-    )'''
+    '''
+    conn.execute("""CREATE TABLE Networks as SELECT * FROM tempFrame""")
+    '''
     
     #create list of network csv data files
     datafilenameKeywords=[
@@ -66,30 +94,40 @@ def databaseTesting(output_1,output_2,network_database_name):
             keyword in filename for keyword in datafilenameKeywords
         ])
     ]
-    edgeTableName=np.sort(edgeTableNames) 
     #initialize sqlalchemy engine
     engine = sqlalchemy.create_engine(
         'sqlite:///'+output_2+'/'+network_database_name,
         echo=False)
-    try:
-        for iTable in edgeTableName:
-            tempFrame=pd.read_csv(str(output_1)+'/'+str(edgeTableName))
-            tempFrame.to_sql('Networks',con=engine,if_exists='append')
-            #conn.commit()
-            gc.collect()
-    except OSError as exc:
-        if exc.errno == 36:
-            print('throw')
+    edgeTableName=np.sort(edgeTableNames) 
+    for iTable in edgeTableName:
+        tempFrame=pd.read_csv(output_1+'/'+iTable)
+        try:
+            tempFrame.to_sql(Networks,con=engine,if_exists='append',index=False)
+        except OSError as exc:
+            if exc.errno == 36:
+                print('throw name too long')
+            else:
+                raise  # re-raise previously caught exception 
+        except IOError:
+            print('READ in ERROR NOTE: nothing is read')
+            return
+        except :
+            print('skipping error')
+            #return
         else:
-            raise  # re-raise previously caught exception
-        print('Done')
+            print('read in success')
+        
+        #conn.commit()
+        gc.collect()
+     
+    print('Done')
     conn=db_m.create_connection(output_2+'/'+network_database_name)
     conn.row_factory=sqlite3.Row
     
     cur=conn.cursor()
     cur.execute("""
-        SELECT * FROM Networks WHERE ((system='wt2') AND (rep='rep1') AND (Frame=1) AND 
-            ((Seqid_1=14) OR (Seqid_2=14)))
+        SELECT * FROM Networks WHERE ((system='wt2') AND (rep='rep1') AND (Frame=1) OR 
+        ((Seqid_1=14) OR (Seqid_2=14)))
         """)
     rows=cur.fetchall()
     testFrame=pd.DataFrame(rows,columns=rows[0].keys())
@@ -111,7 +149,6 @@ def databaseTesting(output_1,output_2,network_database_name):
         'sqlite:///'+output_2+'/'+network_database_name,
         echo=False)
     nodeTableName=np.sort(nodeTableNames)
-    print(nodeTableName)
     for iTable in nodeTableName:
         system,rep,frame=list(map(
                 lambda x: x.split('__')[-1],
@@ -152,7 +189,7 @@ def databaseTesting(output_1,output_2,network_database_name):
     testFrame=pd.DataFrame(rows,columns=rows[0].keys())
     conn.close()
     testFrame.head(n=10)
-    visStruc=pt.load('../structure_files/visualization_structure.pdb',top='../structure_files/visualization_structure.parm7')
+    visStruc=pt.load('/data/charlie/wes_code_clean_up/current-flow-allostery/structure_files/visualization_structure.pdb',top='/data/charlie/wes_code_clean_up/current-flow-allostery/structure_files/visualization_structure.parm7')
     
     nRes=visStruc.topology.n_residues
     nChains=6
@@ -181,8 +218,6 @@ def databaseTesting(output_1,output_2,network_database_name):
     caInfoTable.to_sql('Alpha_Carbon_Structure_Data',con=engine,if_exists='append')
     
     network_database_name='testWrite1.db'
-    output_1='GB_BTW_Network_Data'
-    output_2='cx26_GB_Network_Database'
     nodefilenameKeywords=[
         'csv','System','Replica','Frame','Betweenness','NodeBetweenness'
     ]
@@ -204,9 +239,9 @@ def databaseTesting(output_1,output_2,network_database_name):
     for iTable in nodeTableName:
         system,rep,frame=list(map(
                 lambda x: x.split('__')[-1],
-                nodeTableName.split('.')[1:4]
+                iTable.split('.')[1:4]
         ))
-        tempFrame=pd.read_csv(output_1+'/'+nodeTableName)
+        tempFrame=pd.read_csv(output_1+'/'+iTable)
         tempFrame['system']=system
         tempFrame['rep']=rep
         tempFrame['Frame']=int(frame)
@@ -221,8 +256,6 @@ def databaseTesting(output_1,output_2,network_database_name):
     print('Done')
     
     network_database_name='testWrite2.db'
-    output_1='GB_BTW_Network_Data'
-    output_2='cx26_GB_Network_Database'
     nodefilenameKeywords=[
         'csv','System','Replica','Frame','Betweenness','NodeBetweenness'
     ]
@@ -241,13 +274,12 @@ def databaseTesting(output_1,output_2,network_database_name):
     nTables=101
     tables=[]
     nodeTableName=np.sort(nodeTableNames)
-    print(nodeTableName)
     for iTable in nodeTableName:
         system,rep,frame=list(map(
                 lambda x: x.split('__')[-1],
-                nodeTableName.split('.')[1:4]
+                iTable.split('.')[1:4]
         ))
-        tempFrame=pd.read_csv(output_1+'/'+nodeTableName)
+        tempFrame=pd.read_csv(output_1+'/'+iTable)
         tempFrame['system']=system
         tempFrame['rep']=rep
         tempFrame['Frame']=int(frame)
@@ -268,8 +300,6 @@ def databaseTesting(output_1,output_2,network_database_name):
     
     
     network_database_name='testWrite2.db'
-    output_1='GB_BTW_Network_Data'
-    output_2='cx26_GB_Network_Database'
     engine = sqlalchemy.create_engine(
         'sqlite:///'+output_2+'/'+network_database_name,
         echo=False)
@@ -280,7 +310,7 @@ def databaseTesting(output_1,output_2,network_database_name):
     session = Session()
     
     session.bulk_insert_mappings(
-        MentorInformation, 
+        #MentorInformation, 
         tempFrame.to_dict(orient="records"))
     session.close()
     
@@ -288,9 +318,8 @@ def databaseTesting(output_1,output_2,network_database_name):
     gbKSfiles=[filename for filename in os.listdir(gbKSdir) \
                if 'Results_Summary.csv' in filename]
     
-    networkDatabaseDir='cx26_GB_Network_Database'
     engine=sqlalchemy.create_engine(
-        'sqlite:///'+networkDatabaseDir+'/cx26_GB_Betweenness_Bootstrapped_KS.db'
+        'sqlite:///'+network_database_name+'/cx26_GB_Betweenness_Bootstrapped_KS.db'
     )
     
     gbKStable=pd.concat([
