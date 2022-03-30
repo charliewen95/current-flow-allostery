@@ -249,21 +249,21 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
     Example
     -------    
     current_flow_allostery.betweenness(\
-    'GB_Network_Data',\
-    'output_2',\
-    'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.csv',\
-    'EnergyData_Network.System__n14y2_acetyl.Replica__rep1.Frame__001.Betweenness.csv',\
-    None,\
-    ['Resid_1','Resid_2'],\
-    None,\
-    ['14','240','466','692','918','1144'],\
-    ['47','273','499','725','951','1177'],\
-    True,\
-    True,\
-    True,\
-    None,\
-    True,\
-    2\
+    'input directory',\
+    'output directory',\
+    'input file name',\
+    'output file name',\
+    None,\ 					# selection query strings
+    ['Resid_1','Resid_2'],\			# node columns
+    None,\					# energy column
+    ['14','240','466','692','918','1144'],\	# source node names
+    ['47','273','499','725','951','1177'],\	# target node names
+    True,\					# write full table
+    True,\					# write node vector
+    True,\					# write matrix index to node name map
+    None,\					# dryrun
+    True,\					# verbose
+    2\						# verbose level
     )
     
     Other notes
