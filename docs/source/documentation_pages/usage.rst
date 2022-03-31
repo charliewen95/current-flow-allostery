@@ -17,7 +17,7 @@ For further and more specific examples of how to use, check out the attached bas
 
 Currently this package only support Step1, which is the betweenness calculation.
 
-Next patch: databaseTesting.py --> saving the stored csv data into sqlite3 databases
+Next patch: fixing databaseTesting.py bugs --> saving the stored csv data into sqlite3 databases
 
 For Testing
 -----------
@@ -45,6 +45,7 @@ Simple test:
         True,\
         2\
         )
+        4. current_flow_allostery.databaseTesting('output_1','output_2','network_database_name.db') --> currently only specific for connexin
 
 Things that may go wrong:
         - Check environment (with pip install, dependencies should be installed)
