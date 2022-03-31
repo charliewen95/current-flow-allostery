@@ -47,6 +47,8 @@ Simple test:
         )
 
 Things that may go wrong:
-        -Wrong output folder name
-
+        - Check environment (with pip install, dependencies should be installed)
+          if fails, consider using the attatched creating_environment.sh which creates a specific environment for this package
+        - Wrong output folder name
+        
 

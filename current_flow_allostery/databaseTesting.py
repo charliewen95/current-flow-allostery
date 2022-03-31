@@ -112,7 +112,7 @@ def databaseTesting(output_1,output_2,network_database_name):
             print('READ in ERROR NOTE: nothing is read')
             return
         except :
-            print('skipping error')
+            print(iTable)
             #return
         else:
             print('read in success')
@@ -120,7 +120,7 @@ def databaseTesting(output_1,output_2,network_database_name):
         #conn.commit()
         gc.collect()
      
-    print('Done')
+    print('edgeTableNames Done')
     conn=db_m.create_connection(output_2+'/'+network_database_name)
     conn.row_factory=sqlite3.Row
     
@@ -162,7 +162,7 @@ def databaseTesting(output_1,output_2,network_database_name):
         #conn.commit()
         gc.collect()
     
-    print('Done')      
+    print('nodeTableNames Done')      
     
     conn=db_m.create_connection(output_2+'/'+network_database_name)
     conn.row_factory=sqlite3.Row
@@ -253,7 +253,7 @@ def databaseTesting(output_1,output_2,network_database_name):
         #conn.commit()
         gc.collect()
     
-    print('Done')
+    print('Alpha_Carbon_Structure_Data Done')
     
     network_database_name='testWrite2.db'
     nodefilenameKeywords=[
@@ -292,54 +292,53 @@ def databaseTesting(output_1,output_2,network_database_name):
         #conn.commit()
         gc.collect()
     
-    print('Done')      
+    print('testWrite2.db Done')      
     
     tempFrame[
         tempFrame['NodeName'].isin(np.arange(5)).map(lambda x: not x)
     ]
     
     
-    network_database_name='testWrite2.db'
-    engine = sqlalchemy.create_engine(
-        'sqlite:///'+output_2+'/'+network_database_name,
-        echo=False)
+#    network_database_name='testWrite2.db'
+#    engine = sqlalchemy.create_engine(
+#        'sqlite:///'+output_2+'/'+network_database_name,
+#        echo=False)
+#    
+#    Session = sessionmaker(
+#        bind=engine
+#    )
+#    session = Session()
+#    session.bulk_insert_mappings(
+#        MentorInformation, 
+#        tempFrame.to_dict(orient="records"))
+#    session.close()
     
-    Session = sessionmaker(
-        bind=engine
-    )
-    session = Session()
-    
-    session.bulk_insert_mappings(
-        #MentorInformation, 
-        tempFrame.to_dict(orient="records"))
-    session.close()
-    
-    gbKSdir='../cx26_GB_KS_Testing/KS_Result_Tables/'
-    gbKSfiles=[filename for filename in os.listdir(gbKSdir) \
-               if 'Results_Summary.csv' in filename]
-    
-    engine=sqlalchemy.create_engine(
-        'sqlite:///'+network_database_name+'/cx26_GB_Betweenness_Bootstrapped_KS.db'
-    )
-    
-    gbKStable=pd.concat([
-        pd.read_csv(gbKSdir+filename) for filename in tqbar(gbKSfiles)
-    ])
-    gbKStable=gbKStable.rename(columns={
-        'RefDistName':'Reference_system',
-        'TestDistname':'Test_system',
-        'alpha':'Alpha',
-        'ref_Result':'Ref_Differs',
-        'test_Result':'Test_Differs',
-        'null_cut':'nullCut',
-        'ref_cut':'refCut',
-        'test_cut':'testCut'
-    })
-    gbKStable.head()
-    
-    gbKStable.to_sql(
-        "Edge_GB_KS_Results",
-        con=engine,if_exists='append'
-    )
+#    gbKSdir='../cx26_GB_KS_Testing/KS_Result_Tables/'
+#    gbKSfiles=[filename for filename in os.listdir(gbKSdir) \
+#               if 'Results_Summary.csv' in filename]
+#    
+#    engine=sqlalchemy.create_engine(
+#        'sqlite:///'+network_database_name+'/cx26_GB_Betweenness_Bootstrapped_KS.db'
+#    )
+#    
+#    gbKStable=pd.concat([
+#        pd.read_csv(gbKSdir+filename) for filename in tqbar(gbKSfiles)
+#    ])
+#    gbKStable=gbKStable.rename(columns={
+#        'RefDistName':'Reference_system',
+#        'TestDistname':'Test_system',
+#        'alpha':'Alpha',
+#        'ref_Result':'Ref_Differs',
+#        'test_Result':'Test_Differs',
+#        'null_cut':'nullCut',
+#        'ref_cut':'refCut',
+#        'test_cut':'testCut'
+#    })
+#    gbKStable.head()
+#    
+#    gbKStable.to_sql(
+#        "Edge_GB_KS_Results",
+#        con=engine,if_exists='append'
+#    )
     
     
