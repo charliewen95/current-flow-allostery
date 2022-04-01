@@ -13,4 +13,5 @@ dependencies:
     - pysqlite3
     - sphinx-autoapi
     - pytraj
+    - parallel
 
