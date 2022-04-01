@@ -79,10 +79,12 @@ def databaseTesting(output_1,output_2,network_database_name):
     conn.row_factory=sqlite3.Row
     
     cur=conn.cursor()
+    ##########################################################################
     cur.execute("""
         SELECT * FROM Networks WHERE ((system='n14y2') AND (rep='rep1') AND (Frame=1) AND 
             ((Seqid_1=14) OR (Seqid_2=14)))
         """)
+    #########################################################################^
     rows=cur.fetchall()
     testFrame=pd.DataFrame(rows,columns=rows[0].keys())
     conn.close()
@@ -122,11 +124,12 @@ def databaseTesting(output_1,output_2,network_database_name):
     #####
     conn=db_m.create_connection(network_database_directory+'/'+network_database_name)
     conn.row_factory=sqlite3.Row
-    
+    #########################################################Add variable 
     nodeList=np.concatenate([
         [14+ii*226 for ii in np.arange(6)],
         [47+ii*226 for ii in np.arange(6)]
     ])
+    #########################################################^
     nodeSel=' OR '.join([
         'NodeName=%g'%nodeName \
         for nodeName in nodeList
@@ -146,10 +149,13 @@ def databaseTesting(output_1,output_2,network_database_name):
     conn.close()
     testFrame.head(n=10)
     #####
+    ############################################################################
     visStruc=pt.load('structure_files/visualization_structure.pdb',top='structure_files/visualization_structure.parm7')
-    
+    ###########################################################################^
     nRes=visStruc.topology.n_residues
+    ############################################################################
     nChains=6
+    ###########################################################################^
     resPerChain=nRes/nChains
     
     caInds=visStruc.topology.atom_indices('@CA')
@@ -168,8 +174,9 @@ def databaseTesting(output_1,output_2,network_database_name):
         'Y':visStruc.xyz[0,caInds,1],
         'Z':visStruc.xyz[0,caInds,2]
     })
+    ############################################################################
     caInfoTable['system']='wt2'
-    
+    ############################################################################
     caInfoTable.head()
     
     caInfoTable.to_sql('Alpha_Carbon_Structure_Data',con=engine,if_exists='append')
