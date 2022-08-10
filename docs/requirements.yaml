@@ -7,7 +7,7 @@ dependencies:
     # Base depends
   - python=3.6.15
     # Pip-only installs
-  - pip
+#  - pip
   - pip:
     - -r requirements.txt
     - pysqlite3
