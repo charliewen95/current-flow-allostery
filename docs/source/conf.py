@@ -173,5 +173,5 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
-html_extra_path = ['./googlee1258413a588fdcb.html']
+#html_extra_path = ['./googlee1258413a588fdcb.html']
 
