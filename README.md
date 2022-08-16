@@ -48,4 +48,3 @@ Copyright (c) 2022, Chen Yun Wen
 Project based on the 
 [Computational Molecular Science Python Cookiecutter](https://github.com/molssi/cookiecutter-cms) version 1.6.
 
-<meta name="google-site-verification" content="eoWRQLe962TpWkq5RsBsDKp29CXIzSapMHlokikjYFk" />
