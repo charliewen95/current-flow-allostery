@@ -29,58 +29,39 @@ import time
 #self defined functions
 from .functions import database_mod as db_m
 
-def bootstrap_betweenness(databasePath,outputDatabase,querySQL,systemGroupColumn,interactionGroupColumns,referenceSystems,valueColumn,alphas,testAllPairs,outputBase,outputToCSV,writeBootstrapDistributions,flushGroupCount,dryrun,verbose,verboseLevel):
+def bootstrap_betweenness(databasePath,outputDatabase=None,querySQL='SELECT *; FROM Networks',systemGroupColumn='system',interactionGroupColumns=['Seqid_1','Seqid_2','Chain_Delta'],referenceSystems=['wt2'],valueColumn='Betweenness',alphas=[.1],testAllPairs=False,outputBase='Edge_Betweenness_KS',outputToCSV=False,writeBootstrapDistributions=False,flushGroupCount=1,dryrun=False,verbose=True,verboseLevel=0):
     ##### Defining the variables
     """
-    databasePath		INPUT MUST BE GIVEN
-    ouputDatabase 		default databasePath
-    querySQL      		default 'SELECT *; FROM Networks'
-    systemGroupColumn		default 'system'
-    interactionGroupColumns	default ['Seqid_1','Seqid_2','Chain_Delta']
-    referenceSystems		default ['wt2']
-    valueColumn			default 'Betweenness'
-    alphas			default [.1]
-    testAllPairs		default False
-    outputBase			default 'Edge_Betweenness_KS'
-    outputToCSV			default False
-    writeBootstrapDistributions	default False
-    flushGroupCount		default 1
-    dryrun			default False
-    verbose			default False
-    verboseLevel		default 0
+    Default
+    -------
+    databasePath				INPUT MUST BE GIVEN
+    ouputDatabase 				databasePath
+    querySQL      				'SELECT *; FROM Networks'
+    systemGroupColumn				'system'
+    interactionGroupColumns			['Seqid_1','Seqid_2','Chain_Delta']
+    referenceSystems				['wt2']
+    valueColumn					'Betweenness'
+    alphas					[.1]
+    testAllPairs				False
+    outputBase					'Edge_Betweenness_KS'
+    outputToCSV					False
+    writeBootstrapDistributions			False
+    flushGroupCount				1
+    dryrun					False
+    verbose					False
+    verboseLevel				0
+
+    Example
+    -------
+
+    Other notes
+    -----------
+    
     """
     if databasePath == None:
         print('Path to the directory containing the interaction network file. (required)')
     if outputDatabase == None:
         outputDatabase = databasePath
-    if querySQL == None:
-        querySQL = 'SELECT *; FROM Networks'
-    if systemGroupColumn == None:
-        systemGroupColumn = 'system'
-    if interactionGroupColumns == None:
-        interactionGroupColumns = ['Seqid_1','Seqid_2','Chain_Delta']
-    if referenceSystems == None:
-        referenceSystems = ['wt2']
-    if valueColumn == None:
-        valueColumn = 'Betweenness'
-    if alphas == None:
-        alphas = [.1]
-    if testAllPairs == None:
-        testAllPairs = False
-    if outputBase == None: 
-        outputBase = 'Edge_Betweenness_KS'
-    if outputToCSV == None:
-        outputToCSV = False
-    if writeBootstrapDistributions == None:
-        writeBootstrapDistributions = False
-    if flushGroupCount == None:
-        flushGroupCount = 1
-    if dryrun == None:
-        dryrun = False
-    if verbose == None:
-        verbose = False
-    if verboseLevel == None:
-        verboseLevel = 0
 
     ##### Start of code 
     if verbose or dryrun:

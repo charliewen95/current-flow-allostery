@@ -241,31 +241,42 @@ if __name__ == "__main__":
             nodeTable.to_csv(args.outDir+'/'+args.outputFileNameBase+'.NodeBetweenness.csv',index=False)
 
 
-def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQueryStrings,nodeColumns,energyColumn,sourceNodeNames,targetNodeNames,writeFullTable,writeNodeVector,writeMatrixIndexToNodeNameMap,dryrun,verbose,verboseLevel):
+def betweenness(inDir,outDir,interactionFileName,outputFileNameBase='NO_NAME',selectionQueryStrings=None,nodeColumns=['Resid_1','Resid_2'],energyColumn='TOTAL',sourceNodeNames=None,targetNodeNames=None,writeFullTable=False,writeNodeVector=True,writeMatrixIndexToNodeNameMap=True,dryrun=False,verbose=True,verboseLevel=0):
     """
     This function is the main function to call for the betweenness calculation.
     NOTE: This function take a total of 15 variables, make sure to give them a count
     
+    Default
+    -------
+    inDir				INPUT SHOULD BE GIVEN
+    outDir				INPUT SHOULD BE GIVEN
+    interactionFileName			INPUT MUST BE GIVEN
+    outputFileNameBase			'NO_NAME'
+    selectionQueryStrings		None
+    nodeColumns				['Resid_1','Resid_2']
+    energyColumn			'TOTAL'
+    sourceNodeNames			None ### INPUT MUST BE SET
+    targetNodeNames			None ### INPUT MUST BE SET
+    writeFullTable			False
+    writeNodeVector			True
+    writeMatrixIndexToNodeNameMap	True
+    dryrun				False
+    verbose				True
+    verboseLevel			0
+     
     Example
     -------    
     current_flow_allostery.betweenness(\
-    'input directory',\
-    'output directory',\
-    'input file name',\
-    'output file name',\
-    None,\ 					# selection query strings
-    ['Resid_1','Resid_2'],\			# node columns
-    None,\					# energy column
-    ['14','240','466','692','918','1144'],\	# source node names
-    ['47','273','499','725','951','1177'],\	# target node names
-    True,\					# write full table
-    True,\					# write node vector
-    True,\					# write matrix index to node name map
-    None,\					# dryrun
-    True,\					# verbose
-    2\						# verbose level
-    )
-    
+    '{1}',\
+    '{2}',\
+    '{3}.csv',\
+    '{3}.Betweenness',\
+    sourceNodeNames=['14','240','466','692','918','1144'],\
+    targetNodeNames=['47','273','499','725','951','1177'],\
+    writeFullTable=True,\
+    verboseLevel=2\
+    )   
+ 
     Other notes
     -----------
     If there are multiple files to be run, this can be ran parallel following the example in Step1_Run_GB_Network_Betweenness.slurm.bash.
@@ -278,28 +289,10 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
         outDir = '.'
     if interactionFileName == None:
         print('INPUT FILENAME MISSING')
-    if outputFileNameBase == None:
-        outputFileNameBase = 'NO_NAME'
-    if nodeColumns == None:
-        nodeColumns = ['Resid_1','Resid_2']
-    if energyColumn == None:
-        energyColumn = 'TOTAL'
     if sourceNodeNames == None:
         print('CANNOT BE BLANK: check sourceNodeNames input')
     if targetNodeNames == None:
         print('CANNOT BE BLANK: check targetNodeNames input')
-    if writeFullTable == None:
-        writeFullTable = False
-    if writeNodeVector == None:
-        writeNodeVector = False
-    if writeMatrixIndexToNodeNameMap == None:
-        writeMatrixIndexToNodeNameMap = False
-    if dryrun == None:
-        dryrun = False
-    if verbose == None:
-        verbose = False
-    if verboseLevel == None:
-        verboseLevel = 0
 
     ####################
     if verbose or dryrun:
