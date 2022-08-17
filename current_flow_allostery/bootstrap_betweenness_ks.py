@@ -425,7 +425,6 @@ if __name__ == "__main__":
 ###########################
 
 def bootstrap_betweenness(databasePath,outputDatabase=None,querySQL='SELECT *; FROM Networks',systemGroupColumn='system',interactionGroupColumns=['Seqid_1','Seqid_2','Chain_Delta'],referenceSystems=['wt2'],valueColumn='Betweenness',alphas=[.1],testAllPairs=False,outputBase='Edge_Betweenness_KS',outputToCSV=False,writeBootstrapDistributions=False,flushGroupCount=1,dryrun=False,verbose=True,verboseLevel=0):
-    ##### Defining the variables
     """
     Default
     -------
@@ -448,6 +447,15 @@ def bootstrap_betweenness(databasePath,outputDatabase=None,querySQL='SELECT *; F
 
     Example
     -------
+    current_flow_allostery.bootstrap_betweenness(\
+    'output_2/GB_Network.db',\
+    'output_3/GB_Betweenness_Bootstrapped_KS.db',\
+    querySQL='SELECT * FROM Networks WHERE (Seqid_1={1})',\
+    alphas=[0.05, 0.1, 0.15],\
+    writeBootstrapDistributions=True,\
+    flushGroupCount=25,\
+    verboseLevel=2\
+    )
 
     Other notes
     -----------

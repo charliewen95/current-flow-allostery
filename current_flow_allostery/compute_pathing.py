@@ -752,41 +752,15 @@ if __name__ == "__main__":
                     print(keyName+':',timingsDict[keyName][1]-timingsDict[keyName][0],'seconds')
 ##############################
 
-def compute_pathing(\
-selectionQueryStrings,\
-sourceNodeNames,\
-targetNodeNames,\
-useCSV=False,\
-inputPath='.output_2',\
-groupingColumns=None,\
-computeResids=False,\
-seqCols=['Seqid_1','Seqid_2'],\
-seqStart=0,\
-chainStart=0,\
-residStart=0,\
-chainCols=['Chain_1','Chain_2'],\
-resPerChain=226,\
-nChains=6,\
-nodeColumns=['Resid_1','Resid_2'],\
-weightColumns=['Betweenness'],\
-weightFunction=['abs_1'],\
-stoppingCriteria=["convergence_.0001"],\
-maxPaths=10000,\
-outputNameBase="Pathing",\
-outputDatabase=None,\
-writeTimeout=30,\
-maxWriteAttempts=4,\
-failsafeCSVpath="./output_3/Pathing.Failsafe",\
-dryrun=False,\
-verbose=False,\
-verboseLevel=0\
-):
+def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV=False,inputPath='.output_3',groupingColumns=None,computeResids=False,seqCols=['Seqid_1','Seqid_2'],seqStart=0,chainStart=0,residStart=0,chainCols=['Chain_1','Chain_2'],resPerChain=226,nChains=6,nodeColumns=['Resid_1','Resid_2'],weightColumns=['Betweenness'],weightFunction=['abs_1'],stoppingCriteria=["convergence_.0001"],maxPaths=10000,outputNameBase="Pathing",outputDatabase=None,writeTimeout=30,maxWriteAttempts=4,failsafeCSVpath="./output_4/Pathing.Failsafe",dryrun=False,verbose=False,verboseLevel=0):
     ##### Defining the variables
     """
     Loads the specified GB interaction network and calculates the corresponding flow betweenness network. This tool makes use of Yen's Algorithm from the networkx package to iteratively compute paths until the desired stopping criteria is met.
     
+    Default
+    -------
     useCSV			default 	False
-    inputPath			default		'./output_2'
+    inputPath			default		'./output_3'
     selectionQueryStrings	default         REQUIRED	
     groupingColumns		default		None
     computeResids		default		False
@@ -808,15 +782,18 @@ verboseLevel=0\
     outputDatabase		default		None
     writeTimeout		default		30
     maxWriteAttempts		default		4
-    failsafeCSVpath		default		'./Pathing.Failsafe'
+    failsafeCSVpath		default		'./output_4/Pathing.Failsafe'
     dryrun                      default		False
     verbose                     default		False
     verboseLevel                default		0
+
+    Example
+    -------
+    
+
+    Other Notes
+    -----------
     """
-####ARGS setup
-
-
-
 ####Start of Code
     if verbose or dryrun:
         print('Input arguments:',\

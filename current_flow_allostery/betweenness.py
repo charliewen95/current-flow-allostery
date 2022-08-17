@@ -244,7 +244,7 @@ if __name__ == "__main__":
 def betweenness(inDir,outDir,interactionFileName,outputFileNameBase='NO_NAME',selectionQueryStrings=None,nodeColumns=['Resid_1','Resid_2'],energyColumn='TOTAL',sourceNodeNames=None,targetNodeNames=None,writeFullTable=False,writeNodeVector=True,writeMatrixIndexToNodeNameMap=True,dryrun=False,verbose=True,verboseLevel=0):
     """
     This function is the main function to call for the betweenness calculation.
-    NOTE: This function take a total of 15 variables, make sure to give them a count
+    NOTE: This function take a total of 15 variables, make sure to give them a check and see what each option does
     
     Default
     -------

@@ -6,7 +6,7 @@ from __future__ import print_function
 
 #self defined functions
 from .betweenness import *
-from .databaseTesting import *
+from .databaseCreation import *
 from .bootstrap_betweenness_ks import *
 from .compute_pathing import *
 from .functions import correlation_data_utilities as corr_utils

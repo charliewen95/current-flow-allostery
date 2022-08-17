@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH -J curr-flow-allo
+#SBATCH --get-user-env
+#SBATCH --partition=defq
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=300:00:00
+
+which python
+python --version
+
+parallel -j 4 "python <<-EOF
+import current_flow_allostery as cfa
+cfa.databaseCreation(\
+'{1}',\
+'{2}',\
+'{3}.db',\
+)
+EOF" ::: 'output_1' ::: 'output_2' ::: 'GB_Network'
+
