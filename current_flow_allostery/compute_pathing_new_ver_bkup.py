@@ -776,7 +776,7 @@ outputNameBase="Pathing",\
 outputDatabase=None,\
 writeTimeout=30,\
 maxWriteAttempts=4,\
-failsafeCSVpath="./output_3/Pathing.Failsafe",\
+failsafeCSVpath="./Pathing.Failsafe",\
 dryrun=False,\
 verbose=False,\
 verboseLevel=0\
@@ -820,60 +820,33 @@ verboseLevel=0\
 ####Start of Code
     if verbose or dryrun:
         print('Input arguments:',\
-" ",\
 selectionQueryStrings,\
-" ",\
 sourceNodeNames,\
-" ",\
 targetNodeNames,\
-" ",\
-useCSV,\
-" ",\
-inputPath,\
-" ",\
-groupingColumns,\
-" ",\
-computeResids,\
-" ",\
-seqCols,\
-" ",\
-seqStart,\
-" ",\
-chainStart,\
-" ",\
-residStart,\
-" ",\
-chainCols,\
-" ",\
-resPerChain,\
-" ",\
-nChains,\
-" ",\
-nodeColumns,\
-" ",\
-weightColumns,\
-" ",\
-weightFunction,\
-" ",\
-stoppingCriteria,\
-" ",\
-maxPaths,\
-" ",\
-outputNameBase,\
-" ",\
-outputDatabase,\
-" ",\
-writeTimeout,\
-" ",\
-maxWriteAttempts,\
-" ",\
-failsafeCSVpath,\
-" ",\
-dryrun,\
-" ",\
-verbose,\
-" ",\
-verboseLevel\
+useCSV=False,\
+inputPath='.output_2',\
+groupingColumns=None,\
+computeResids=False,\
+seqCols=['Seqid_1','Seqid_2'],\
+seqStart=0,\
+chainStart=0,\
+residStart=0,\
+chainCols=['Chain_1','Chain_2'],\
+resPerChain=226,\
+nChains=6,\
+nodeColumns=['Resid_1','Resid_2'],\
+weightColumns=['Betweenness'],\
+weightFunction=['abs_1'],\
+stoppingCriteria=["convergence_.0001"],\
+maxPaths=10000,\
+outputNameBase="Pathing",\
+outputDatabase=None,\
+writeTimeout=30,\
+maxWriteAttempts=4,\
+failsafeCSVpath="./Pathing.Failsafe",\
+dryrun=False,\
+verbose=False,\
+verboseLevel=0\
 )
     if not dryrun:
         verbose=verbose
@@ -989,14 +962,14 @@ verboseLevel\
             gc.collect()
     
             if computeResids:
-                networkData[nodeColumns[0]]=(networkData[seqCols[0]]-int(seqStart))+\
-                    int(resPerChain)* (
-                            (networkData[chainCols[0]]-int(chainStart)) % int(nChains)
-                        )+int(residStart)
-                networkData[nodeColumns[1]]=(networkData[seqCols[1]]-int(seqStart))+\
-                    int(resPerChain)* (
-                            (networkData[chainCols[1]]-int(chainStart)) % int(nChains)
-                        )+int(residStart)
+                networkData[nodeColumns[0]]=(networkData[args.seqCols[0]]-int(args.seqStart))+\
+                    int(args.resPerChain)* (
+                            (networkData[args.chainCols[0]]-int(args.chainStart)) % int(args.nChains)
+                        )+int(args.residStart)
+                networkData[args.nodeColumns[1]]=(networkData[args.seqCols[1]]-int(args.seqStart))+\
+                    int(args.resPerChain)* (
+                            (networkData[args.chainCols[1]]-int(args.chainStart)) % int(args.nChains)
+                        )+int(args.residStart)
     
         timingsDict['loading'][1]=time.time()
         timingsDict['setup'][0]=time.time()
@@ -1008,10 +981,10 @@ verboseLevel\
             sys.stdout.flush()
     
         if verbose and (verboseLevel>1):
-            print('source node names:',sourceNodeNames)
-            print('target node names:',targetNodeNames)
+            print('source node names:',args.sourceNodeNames)
+            print('target node names:',args.targetNodeNames)
         
-        nodeColumn_1,nodeColumn_2=nodeColumns
+        nodeColumn_1,nodeColumn_2=args.nodeColumns
         if verbose and (verboseLevel > 0):
             print('Building node name to index maps')
         nodeNames=np.unique(np.sort(np.concatenate([
@@ -1026,7 +999,7 @@ verboseLevel\
     
         if verbose and (verboseLevel>0):
             print('building source node list')
-        sourceNodeNames=np.array(sourceNodeNames)
+        sourceNodeNames=np.array(args.sourceNodeNames)
         sourceNodes=np.array([
             nameToIndTable.set_index('NodeNames')['NodeInds'].loc[sourceNodeName] \
             for sourceNodeName in sourceNodeNames
@@ -1038,7 +1011,7 @@ verboseLevel\
         if verbose and (verboseLevel>0):
             print('building target node list')
             sys.stdout.flush()
-        targetNodeNames=np.array(targetNodeNames)
+        targetNodeNames=np.array(args.targetNodeNames)
         targetNodes=np.array([
             nameToIndTable.set_index('NodeNames')['NodeInds'].loc[targetNodeName] \
             for targetNodeName in targetNodeNames
@@ -1050,15 +1023,15 @@ verboseLevel\
         sourceGrid,targetGrid=np.meshgrid(sourceNodes,targetNodes)
         pathTables=[]
         timingsDict['pathFinding'][0]=time.time()
-        if groupingColumns is None:
+        if args.groupingColumns is None:
             netData=networkData
-            for iWeight,weightColumn in enumerate(weightColumns):
+            for iWeight,weightColumn in enumerate(args.weightColumns):
                 if iWeight < len(weightFuns):
                     weightFun=weightFuns[iWeight]
-                    funName=weightFunction[iWeight]
+                    funName=args.weightFunction[iWeight]
                 else:
                     weightFun=weightFuns[-1]
-                    funName=weightFunction[-1]
+                    funName=args.weightFunction[-1]
     
                 if verbose and (verboseLevel > 0):
                     print(weightColumn+'__'+funName,end="(Pair: ")
@@ -1073,7 +1046,7 @@ verboseLevel\
                 ).todense())
                 netGraph=nx.from_numpy_array(netMat)
                 
-                for stoppingCriteria in stoppingCriteria:
+                for stoppingCriteria in args.stoppingCriteria:
                     stopType,stopVal=stoppingCriteria.split('_')
                     if not (stopType in ['convergence','relativeDilation','totalDilation','count']):
                         print("unrecognized stopping criteria '{ctype}'".format(ctype=stopType) +\
@@ -1094,7 +1067,7 @@ verboseLevel\
                             stopVal=float(stopVal)
                             paths=corr_utils.converge_subopt_paths_betweenness(
                                 inputNetwork=netGraph,source=sourceInd,target=targetInd,weight='weight',
-                                maxPaths=int(maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
+                                maxPaths=int(args.maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
                             )
                         elif stopType=='relativeDilation':
                             stopVal=float(stopVal)
@@ -1111,7 +1084,7 @@ verboseLevel\
                                 print('Min_Path_Length {pl}'.format(pl=pathLen))
                             while( 
                                 (((pathLen-minPathLen)/minPathLen) < stopVal) and \
-                                (len(paths)<int(maxPaths)) 
+                                (len(paths)<int(args.maxPaths)) 
                             ):
                                 paths.append(next(pathGenerator))
                                 pathLen=corr_utils.calculatePathLength(
@@ -1140,7 +1113,7 @@ verboseLevel\
                                 print('Min_Path_Length {pl}'.format(pl=pathLen))
                             while( 
                                 ((pathLen-minPathLen) < stopVal) and \
-                                (len(paths)<int(maxPaths)) 
+                                (len(paths)<int(args.maxPaths)) 
                             ):
                                 paths.append(next(pathGenerator))
                                 pathLen=corr_utils.calculatePathLength(
@@ -1171,7 +1144,7 @@ verboseLevel\
                                 ]
                             )
                         })
-                        for colName,colVal in zip(groupingColumns,netName):
+                        for colName,colVal in zip(args.groupingColumns,netName):
                             pathTable[colName]=colVal
                         pathTable["Weight_Name"]=weightName
                         pathTable["Source"]=nameToIndTable.set_index('NodeInds')['NodeNames'].loc[sourceInd]
@@ -1191,7 +1164,7 @@ verboseLevel\
                             print("({pft:.3f} seconds)".format(pft=stopTime-startTime))
                             sys.stdout.flush()
         else:
-            networkGroups=networkData.groupby(groupingColumns)
+            networkGroups=networkData.groupby(args.groupingColumns)
             if verbose:
                 if verboseLevel > 0:
                     print("Detected {nNets} networks.".format(nNets=len(networkGroups)))
@@ -1200,17 +1173,17 @@ verboseLevel\
                 netName,netData=netGroup
                 if verbose and verboseLevel>0:
                     print(
-                        ', '.join([str(colName)+'__'+str(colVal) for colName,colVal in zip(groupingColumns,list(netName))]),
+                        ', '.join([str(colName)+'__'+str(colVal) for colName,colVal in zip(args.groupingColumns,list(netName))]),
                         end=":"    
                     )
     
-                for iWeight,weightColumn in enumerate(weightColumns):
+                for iWeight,weightColumn in enumerate(args.weightColumns):
                     if iWeight < len(weightFuns):
                         weightFun=weightFuns[iWeight]
-                        funName=weightFunction[iWeight]
+                        funName=args.weightFunction[iWeight]
                     else:
                         weightFun=weightFuns[-1]
-                        funName=weightFunction[-1]
+                        funName=args.weightFunction[-1]
     
                     weightName=weightColumn+'__'+funName
                     if verbose and (verboseLevel > 0):
@@ -1227,7 +1200,7 @@ verboseLevel\
     
                     netGraph=nx.from_numpy_array(netMat)
     
-                    for stoppingCriteria in stoppingCriteria:
+                    for stoppingCriteria in args.stoppingCriteria:
                         stopType,stopVal=stoppingCriteria.split('_')
                         if not (stopType in ['convergence','relativeDilation','totalDilation','count']):
                             print("unrecognized stopping criteria '{ctype}'".format(ctype=stopType) +\
@@ -1250,7 +1223,7 @@ verboseLevel\
                                 stopVal=float(stopVal)
                                 paths=corr_utils.converge_subopt_paths_betweenness(
                                     inputNetwork=netGraph,source=sourceInd,target=targetInd,weight='weight',
-                                    maxPaths=int(maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
+                                    maxPaths=int(args.maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
                                 )
                             elif stopType=='relativeDilation':
                                 stopVal=float(stopVal)
@@ -1267,7 +1240,7 @@ verboseLevel\
                                     print('Min_Path_Length {pl}'.format(pl=pathLen))
                                 while( 
                                     (((pathLen-minPathLen)/minPathLen) < stopVal) and \
-                                    (len(paths)<int(maxPaths)) 
+                                    (len(paths)<int(args.maxPaths)) 
                                 ):
                                     paths.append(next(pathGenerator))
                                     pathLen=corr_utils.calculatePathLength(
@@ -1296,7 +1269,7 @@ verboseLevel\
                                     print('Min_Path_Length {pl}'.format(pl=pathLen))
                                 while( 
                                     ((pathLen-minPathLen) < stopVal) and \
-                                    (len(paths)<int(maxPaths)) 
+                                    (len(paths)<int(args.maxPaths)) 
                                 ):
                                     paths.append(next(pathGenerator))
                                     pathLen=corr_utils.calculatePathLength(
@@ -1328,7 +1301,7 @@ verboseLevel\
                                     ]
                                 )
                             })
-                            for colName,colVal in zip(groupingColumns,netName):
+                            for colName,colVal in zip(args.groupingColumns,netName):
                                 pathTable[colName]=colVal
                             pathTable["Weight_Name"]=weightName
                             pathTable["Source"]=nameToIndTable.set_index('NodeInds')['NodeNames'].loc[sourceInd]
@@ -1355,24 +1328,24 @@ verboseLevel\
             print("saving paths",end=" ")
         timingsDict['save'][0]=time.time()
         
-        if useCSV:
+        if args.useCSV:
             pathingTable.to_csv(
                 outputNameBase+'.Paths.csv'
             )
         else:
             writeSuccess=False
             tryCount=0
-            while (not writeSuccess) and (tryCount < int(maxWriteAttempts)):
+            while (not writeSuccess) and (tryCount < int(args.maxWriteAttempts)):
                 try:
                     pathingTable.to_sql(
-                        outputNameBase+'.Paths',
+                        args.outputNameBase+'.Paths',
                         con=writeEngine,if_exists='append'
                     )
                     writeSuccess=True
                 except Exception as e:
                     tryCount+=1
                     print("Failed to write results to database due to an error, {nleft} trys remaining".format(
-                       nleft=int(maxWriteAttempts)-tryCount
+                       nleft=int(args.maxWriteAttempts)-tryCount
                     ))
                     print(e.__doc__)
                     #print(e.message)
@@ -1382,7 +1355,7 @@ verboseLevel\
                     writeSuccess=True
     
             if not writeSuccess:
-                outfilepath=failsafeCSVpath+'.'+str(os.getpid())+'.'+\
+                outfilepath=args.failsafeCSVpath+'.'+str(os.getpid())+'.'+\
                     '_'.join(list(map(str,list(time.localtime())[:-1])))+'.csv'  
                 print("WARNING! Failed to write data to database due to repeated lock failures")
                 print("Writting data to failsafe CSV file instead: "+outfilepath)
@@ -1399,4 +1372,3 @@ verboseLevel\
                 print("Timings:")
                 for keyName in timingsDict:
                     print(keyName+':',timingsDict[keyName][1]-timingsDict[keyName][0],'seconds')
-

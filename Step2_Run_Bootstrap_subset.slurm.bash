@@ -15,7 +15,7 @@ parallel -j 12 "python <<- EOF
 import current_flow_allostery
 current_flow_allostery.bootstrap_betweenness(\
 'output_2/network_database_name.db',\
-'output_3/GB_Betweenness_Bootstrapped_KS.db',\
+'output_2/GB_Betweenness_Bootstrapped_KS.db',\
 'SELECT * FROM Networks WHERE (Seqid_1={1})',\
 None,\
 None,\

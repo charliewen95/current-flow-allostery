@@ -50,3 +50,11 @@ def converge_subopt_paths_betweenness(inputNetwork,source,target,weight='weight'
     else:
         return(pathList)
  
+
+#A convenience function for calculating the length of an arbitrary path
+#in a weighted graph
+def calculatePathLength(pathGraph,path,weight='weight'):
+    return(np.sum([pathGraph.edges()[(edge[0],edge[1])][weight] \
+                   for edge in zip(path[:-1],path[1:])]))
+
+

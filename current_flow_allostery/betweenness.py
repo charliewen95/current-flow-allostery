@@ -418,3 +418,5 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase,selectionQue
             if verbose:
                 print('Saving node betweenness data')
             nodeTable.to_csv(outDir+'/'+outputFileNameBase+'.NodeBetweenness.csv',index=False)
+
+
