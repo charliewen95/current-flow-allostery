@@ -752,7 +752,7 @@ if __name__ == "__main__":
                     print(keyName+':',timingsDict[keyName][1]-timingsDict[keyName][0],'seconds')
 ##############################
 
-def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV=False,inputPath='./output_2/GB_Network.db',groupingColumns=None,computeResids=False,seqCols=['Seqid_1','Seqid_2'],seqStart=0,chainStart=0,residStart=0,chainCols=['Chain_1','Chain_2'],resPerChain=None,nChains=None,nodeColumns=['Resid_1','Resid_2'],weightColumns=['Betweenness'],weightFunction=['Betweenness'],stoppingCriteria=["convergence_.0001"],maxPaths=10000,outputNameBase="Pathing",outputDatabase=None,writeTimeout=30,maxWriteAttempts=4,failsafeCSVpath="./Pathing.Failsafe",dryrun=False,verbose=False,verboseLevel=0):
+def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV=False,inputPath='./output_2/GB_Network.db',groupingColumns=None,computeResids=False,seqCols=['Seqid_1','Seqid_2'],seqStart=0,chainStart=0,residStart=0,chainCols=['Chain_1','Chain_2'],resPerChain=None,nChains=None,nodeColumns=['Resid_1','Resid_2'],weightColumns=['Betweenness'],weightFunction=['Betweenness'],stoppingCriterias=["convergence_.0001"],maxPaths=10000,outputNameBase="Pathing",outputDatabase=None,writeTimeout=30,maxWriteAttempts=4,failsafeCSVpath="./Pathing.Failsafe",dryrun=False,verbose=False,verboseLevel=0):
     ##### Defining the variables
     """
     Loads the specified GB interaction network and calculates the corresponding flow betweenness network. This tool makes use of Yen's Algorithm from the networkx package to iteratively compute paths until the desired stopping criteria is met.
@@ -776,7 +776,8 @@ def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV
     nodeColumns			default 	['Resid_1','Resid_2']
     weightColumns		default		['Betweenness']
     weightFunction		default 	['abs_1']
-    stoppingCriteria		default		["convergence_.0001"]
+    stoppingCriterias		default		["convergence_.0001"]
+				OPTIONS		'convergence','relativeDilation','totalDilation','count'
     maxPaths			default		10000
     outputNameBase		default	 	"Pathing"
     outputDatabase		default		None
@@ -789,7 +790,18 @@ def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV
 
     Example
     -------
-    
+    current_flow_allostery.compute_pathing(\
+    '*, Seqid_1 + 226 * ( Chain_1 - 1 ) AS Resid_1, Seqid_2 + ( Chain_2 - 1 ) * 226 AS Resid_2 FROM Networks WHERE system = \"{1}\" and rep = \"{2}\" and Frame = 1;',\
+    ['14','240','466','692','918','1144'],\
+    ['47','273','499','725','951','1177'],\
+    groupingColumns=['system', 'rep', 'Frame'],\
+    stoppingCriterias=['convergence_.001'],\
+    weightFunction=['reciprocal_1.', 'reciprocal_.61'],\
+    weightColumns=['Betweenness', 'TOTAL'],\
+    outputDatabase='./output_4/Pathing.db',\
+    verbose=True,\
+    verboseLevel=2\
+    )
 
     Other Notes
     -----------
@@ -812,62 +824,8 @@ def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV
 
 ####Start of Code
     if verbose or dryrun:
-        print('Input arguments:',\
-" ",\
-selectionQueryStrings,\
-" ",\
-sourceNodeNames,\
-" ",\
-targetNodeNames,\
-" ",\
-useCSV,\
-" ",\
-inputPath,\
-" ",\
-groupingColumns,\
-" ",\
-computeResids,\
-" ",\
-seqCols,\
-" ",\
-seqStart,\
-" ",\
-chainStart,\
-" ",\
-residStart,\
-" ",\
-chainCols,\
-" ",\
-resPerChain,\
-" ",\
-nChains,\
-" ",\
-nodeColumns,\
-" ",\
-weightColumns,\
-" ",\
-weightFunction,\
-" ",\
-stoppingCriteria,\
-" ",\
-maxPaths,\
-" ",\
-outputNameBase,\
-" ",\
-outputDatabase,\
-" ",\
-writeTimeout,\
-" ",\
-maxWriteAttempts,\
-" ",\
-failsafeCSVpath,\
-" ",\
-dryrun,\
-" ",\
-verbose,\
-" ",\
-verboseLevel\
-)
+        print('Input arguments:'," ",selectionQueryStrings," ",sourceNodeNames," ",
+targetNodeNames," ",useCSV," ",inputPath," ",groupingColumns," ",computeResids," ",seqCols," ",seqStart," ",chainStart," ",residStart," ",chainCols," ",resPerChain," ",nChains," ",nodeColumns," ",weightColumns," ",weightFunction," ",stoppingCriterias," ",maxPaths," ",outputNameBase," ",outputDatabase," ",writeTimeout," ",maxWriteAttempts," ",failsafeCSVpath," ",dryrun," ",verbose," ",verboseLevel)
     if not dryrun:
         verbose=verbose
         verboseLevel=int(verboseLevel)
@@ -954,16 +912,16 @@ verboseLevel\
                 if verboseLevel>0:
                     t1=time.time()
             
-            networkTables=[]
 ###################################################
+            networkTables=[]
 #            for querySQL in selectionQueryStrings:
 #                query = readSession.query(querySQL)
 #                networkTables.append(pd.read_sql(query.statement,readEngine))
             query = readSession.query(selectionQueryStrings)
             networkTables.append(pd.read_sql(query.statement,readEngine))
-###################################################
             networkData=pd.concat(networkTables)
             networkTables=[]
+###################################################
             gc.collect()
             if computeResids:
                 networkData[nodeColumns[0]]=(networkData[seqCols[0]]-int(seqStart))+\
@@ -1070,7 +1028,7 @@ verboseLevel\
                 ).todense())
                 netGraph=nx.from_numpy_array(netMat)
                 
-                for stoppingCriteria in stoppingCriteria:
+                for stoppingCriteria in stoppingCriterias:
                     stopType,stopVal=stoppingCriteria.split('_')
                     if not (stopType in ['convergence','relativeDilation','totalDilation','count']):
                         print("unrecognized stopping criteria '{ctype}'".format(ctype=stopType) +\
@@ -1089,7 +1047,7 @@ verboseLevel\
                             print(stopType+stopVal,end=" ")
                         if stopType=='convergence':
                             stopVal=float(stopVal)
-                            paths=corr_utils.converge_subopt_paths_betweenness(
+                            paths=pt_calc.converge_subopt_paths_betweenness(
                                 inputNetwork=netGraph,source=sourceInd,target=targetInd,weight='weight',
                                 maxPaths=int(maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
                             )
@@ -1100,7 +1058,7 @@ verboseLevel\
                             )
                             shortestPath=next(pathGenerator)
                             paths=[shortestPath]
-                            minPathLen=corr_utils.calculatePathLength(
+                            minPathLen=pt_calc.calculatePathLength(
                                 pathGraph=netGraph,path=paths[0],weight='weight'
                             )
                             pathLen=minPathLen
@@ -1111,7 +1069,7 @@ verboseLevel\
                                 (len(paths)<int(maxPaths)) 
                             ):
                                 paths.append(next(pathGenerator))
-                                pathLen=corr_utils.calculatePathLength(
+                                pathLen=pt_calc.calculatePathLength(
                                     pathGraph=netGraph,path=paths[-1],weight='weight'
                                 )
                                 if verbose and (verboseLevel > 2):
@@ -1129,7 +1087,7 @@ verboseLevel\
                             )
                             shortestPath=next(pathGenerator)
                             paths=[shortestPath]
-                            minPathLen=corr_utils.calculatePathLength(
+                            minPathLen=pt_calc.calculatePathLength(
                                 pathGraph=netGraph,path=paths[0],weight='weight'
                             )
                             pathLen=minPathLen
@@ -1140,7 +1098,7 @@ verboseLevel\
                                 (len(paths)<int(maxPaths)) 
                             ):
                                 paths.append(next(pathGenerator))
-                                pathLen=corr_utils.calculatePathLength(
+                                pathLen=pt_calc.calculatePathLength(
                                     pathGraph=netGraph,path=paths[-1],weight='weight'
                                 )
                                 if verbose and (verboseLevel > 2):
@@ -1152,7 +1110,7 @@ verboseLevel\
                                         print(paths[-1])
                         else:
                             stopVal=int(stopVal)
-                            paths=corr_utils.k_shortest_paths(
+                            paths=pt_calc.k_shortest_paths(
                                 G=netGraph, source=sourceInd, target=targetInd, k=stopVal, weight='weight'
                             )
     
@@ -1161,7 +1119,7 @@ verboseLevel\
                             "Path_NodeRank":np.concatenate([np.arange(len(path)) for path in paths]),
                             "Path_Length":np.concatenate(
                                 [
-                                    [corr_utils.calculatePathLength(
+                                    [pt_calc.calculatePathLength(
                                         pathGraph=netGraph,path=path,weight='weight'
                                     )]*len(path) \
                                     for path in paths
@@ -1224,7 +1182,7 @@ verboseLevel\
     
                     netGraph=nx.from_numpy_array(netMat)
     
-                    for stoppingCriteria in stoppingCriteria:
+                    for stoppingCriteria in stoppingCriterias:
                         stopType,stopVal=stoppingCriteria.split('_')
                         if not (stopType in ['convergence','relativeDilation','totalDilation','count']):
                             print("unrecognized stopping criteria '{ctype}'".format(ctype=stopType) +\
@@ -1245,7 +1203,7 @@ verboseLevel\
                                 print(stopType+str(stopVal),end=" ")
                             if stopType=='convergence':
                                 stopVal=float(stopVal)
-                                paths=corr_utils.converge_subopt_paths_betweenness(
+                                paths=pt_calc.converge_subopt_paths_betweenness(
                                     inputNetwork=netGraph,source=sourceInd,target=targetInd,weight='weight',
                                     maxPaths=int(maxPaths),tolerance=stopVal,giveAlphas=False,verbose=(verboseLevel>2)
                                 )
@@ -1256,7 +1214,7 @@ verboseLevel\
                                 )
                                 shortestPath=next(pathGenerator)
                                 paths=[shortestPath]
-                                minPathLen=corr_utils.calculatePathLength(
+                                minPathLen=pt_calc.calculatePathLength(
                                     pathGraph=netGraph,path=paths[0],weight='weight'
                                 )
                                 pathLen=minPathLen
@@ -1267,7 +1225,7 @@ verboseLevel\
                                     (len(paths)<int(maxPaths)) 
                                 ):
                                     paths.append(next(pathGenerator))
-                                    pathLen=corr_utils.calculatePathLength(
+                                    pathLen=pt_calc.calculatePathLength(
                                         pathGraph=netGraph,path=paths[-1],weight='weight'
                                     )
                                     if verbose and (verboseLevel > 2):
@@ -1285,7 +1243,7 @@ verboseLevel\
                                 )
                                 shortestPath=next(pathGenerator)
                                 paths=[shortestPath]
-                                minPathLen=corr_utils.calculatePathLength(
+                                minPathLen=pt_calc.calculatePathLength(
                                     pathGraph=netGraph,path=paths[0],weight='weight'
                                 )
                                 pathLen=minPathLen
@@ -1296,7 +1254,7 @@ verboseLevel\
                                     (len(paths)<int(maxPaths)) 
                                 ):
                                     paths.append(next(pathGenerator))
-                                    pathLen=corr_utils.calculatePathLength(
+                                    pathLen=pt_calc.calculatePathLength(
                                         pathGraph=netGraph,path=paths[-1],weight='weight'
                                     )
                                     if verbose and (verboseLevel > 2):
@@ -1308,7 +1266,7 @@ verboseLevel\
                                             print(paths[-1])
                             else:
                                 stopVal=int(stopVal)
-                                paths=corr_utils.k_shortest_paths(
+                                paths=pt_calc.k_shortest_paths(
                                     G=netGraph, source=sourceInd, target=targetInd, k=stopVal, weight='weight'
                                 )
     
@@ -1318,7 +1276,7 @@ verboseLevel\
                                 "Path_Nodes":nameToIndTable.set_index('NodeInds')['NodeNames'].loc[np.concatenate(paths)],
                                 "Path_Lengths":np.concatenate(
                                     [
-                                        [corr_utils.calculatePathLength(
+                                        [pt_calc.calculatePathLength(
                                             pathGraph=netGraph,path=path,weight='weight'
                                         )]*len(path) \
                                         for path in paths
@@ -1396,4 +1354,3 @@ verboseLevel\
                 print("Timings:")
                 for keyName in timingsDict:
                     print(keyName+':',timingsDict[keyName][1]-timingsDict[keyName][0],'seconds')
-
