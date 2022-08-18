@@ -27,11 +27,7 @@ import gc
 import time
 
 ##others
-#import sqlalchemy
-#from sqlalchemy import create_engine
-#from sqlalchemy.orm import sessionmaker
-#import sqlite3
-#from sqlite3 import Error
+
 
 #self defined functions
 if __name__ == "__main__":

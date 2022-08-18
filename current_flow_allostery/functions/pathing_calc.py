@@ -1,3 +1,16 @@
+#numerical / data packages
+try:
+    import numpy as np
+    np.set_printoptions(threshold=10)
+except ImportError:
+    raise ImportError("require numpy")
+
+#utilities
+import copy
+
+#Others
+import networkx as nx
+
 #taken directly from the networkx manual
 def k_shortest_paths(G, source, target, k, weight=None):
      return list(islice(nx.shortest_simple_paths(G, source, target, weight=weight), k))
