@@ -280,6 +280,12 @@ def betweenness(inDir,outDir,interactionFileName,outputFileNameBase='NO_NAME',se
     Other notes
     -----------
     If there are multiple files to be run, this can be ran parallel following the example in Step1_Run_GB_Network_Betweenness.slurm.bash.
+
+    sourceNodeNames & targetNodeNames format is :
+    ['#','#','#','#']
+    keep in mind if following format is used it will produce "key error"
+    [#,#,#,#]
+
     
     """
     #####Default Settings of the Variables

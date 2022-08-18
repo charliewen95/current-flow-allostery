@@ -223,7 +223,7 @@ if __name__ == "__main__":
     )
     
     args=parser.parse_args()
-    
+ 
     if args.verbose or args.dryrun:
         print('Input arguments:',args)
     if not args.dryrun:
@@ -752,16 +752,18 @@ if __name__ == "__main__":
                     print(keyName+':',timingsDict[keyName][1]-timingsDict[keyName][0],'seconds')
 ##############################
 
-def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV=False,inputPath='.output_3',groupingColumns=None,computeResids=False,seqCols=['Seqid_1','Seqid_2'],seqStart=0,chainStart=0,residStart=0,chainCols=['Chain_1','Chain_2'],resPerChain=226,nChains=6,nodeColumns=['Resid_1','Resid_2'],weightColumns=['Betweenness'],weightFunction=['abs_1'],stoppingCriteria=["convergence_.0001"],maxPaths=10000,outputNameBase="Pathing",outputDatabase=None,writeTimeout=30,maxWriteAttempts=4,failsafeCSVpath="./output_4/Pathing.Failsafe",dryrun=False,verbose=False,verboseLevel=0):
+def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV=False,inputPath='./output_2/GB_Network.db',groupingColumns=None,computeResids=False,seqCols=['Seqid_1','Seqid_2'],seqStart=0,chainStart=0,residStart=0,chainCols=['Chain_1','Chain_2'],resPerChain=None,nChains=None,nodeColumns=['Resid_1','Resid_2'],weightColumns=['Betweenness'],weightFunction=['Betweenness'],stoppingCriteria=["convergence_.0001"],maxPaths=10000,outputNameBase="Pathing",outputDatabase=None,writeTimeout=30,maxWriteAttempts=4,failsafeCSVpath="./Pathing.Failsafe",dryrun=False,verbose=False,verboseLevel=0):
     ##### Defining the variables
     """
     Loads the specified GB interaction network and calculates the corresponding flow betweenness network. This tool makes use of Yen's Algorithm from the networkx package to iteratively compute paths until the desired stopping criteria is met.
     
     Default
     -------
-    useCSV			default 	False
-    inputPath			default		'./output_3'
     selectionQueryStrings	default         REQUIRED	
+    sourceNodeNames		default 	REQUIRED
+    targetNodeNames		default 	REQUIRED
+    useCSV			default 	False
+    inputPath			default		'./output_2/GB_Network.db'
     groupingColumns		default		None
     computeResids		default		False
     seqCols			default		['Seqid_1','Seqid_2']
@@ -769,20 +771,18 @@ def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV
     chainStart			default 	0
     residStart			default 	0
     chainCols			default 	['Chain_1','Chain_2']
-    resPerChain			default		226
-    nChains			default 	6
+    resPerChain			default		None
+    nChains			default 	None
     nodeColumns			default 	['Resid_1','Resid_2']
     weightColumns		default		['Betweenness']
     weightFunction		default 	['abs_1']
-    sourceNodeNames		default 	REQUIRED
-    targetNodeNames		default 	REQUIRED
     stoppingCriteria		default		["convergence_.0001"]
     maxPaths			default		10000
     outputNameBase		default	 	"Pathing"
     outputDatabase		default		None
     writeTimeout		default		30
     maxWriteAttempts		default		4
-    failsafeCSVpath		default		'./output_4/Pathing.Failsafe'
+    failsafeCSVpath		default		'./Pathing.Failsafe'
     dryrun                      default		False
     verbose                     default		False
     verboseLevel                default		0
@@ -793,7 +793,23 @@ def compute_pathing(selectionQueryStrings,sourceNodeNames,targetNodeNames,useCSV
 
     Other Notes
     -----------
+    sourceNodeNames & targetNodeNames format is :
+    ['#','#','#','#']
+    keep in mind if following format is used it will produce "key error"
+    [#,#,#,#]
+
     """
+####
+    if resPerChain == None:
+        print('resPerChain MISSING: SETTING TO DEFAULT TEST CASE VALUE 226')
+        resPerChain = 226
+    if nChains == None:
+        print('nChains MISSING: SETTING TO DEFAULT TEST CASE VALUE 6')
+        nChains = 6
+    if groupingColumns == None:
+        print("groupingColumns MISSING: SETTING TO DEFAULT TEST CASE VALUE 'system'")
+        groupingColumns = 'system'
+
 ####Start of Code
     if verbose or dryrun:
         print('Input arguments:',\
@@ -939,9 +955,13 @@ verboseLevel\
                     t1=time.time()
             
             networkTables=[]
-            for querySQL in selectionQueryStrings:
-                query = readSession.query(querySQL)
-                networkTables.append(pd.read_sql(query.statement,readEngine))
+###################################################
+#            for querySQL in selectionQueryStrings:
+#                query = readSession.query(querySQL)
+#                networkTables.append(pd.read_sql(query.statement,readEngine))
+            query = readSession.query(selectionQueryStrings)
+            networkTables.append(pd.read_sql(query.statement,readEngine))
+###################################################
             networkData=pd.concat(networkTables)
             networkTables=[]
             gc.collect()
