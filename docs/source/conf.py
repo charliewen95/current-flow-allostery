@@ -103,6 +103,19 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_context = {
+    "display_github": True,
+    "gtag.js": ["_static/gtag.js"]
+#    "github_user": "ros-planning",
+#    "github_repo": "moveit_tutorials",
+#    "github_version": "master",
+#    "conf_py_path": "",
+#    "source_suffix": source_suffix,
+#    "css_files": ["_static/override.css"],
+#    "favicon": "favicon.ico"
+#    "logo": "logo.png"
+}
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
