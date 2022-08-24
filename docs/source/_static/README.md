@@ -13,4 +13,5 @@ templates_path = ['_static']
 ## Examples of file to add to this directory
 * Custom Cascading Style Sheets
 * Custom JavaScript code
+gtag.js
 * Static logo images
